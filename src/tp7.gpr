@@ -1,0 +1,34 @@
+with "gnoga";
+with "zanyblue";
+with "lib_components";
+
+project TP7 is
+
+   for Source_Dirs use (".");
+   for Object_Dir use "../obj";
+   for Library_Name use "tp7ada-gnoga";
+   for Library_Dir use "../lib";
+   for Library_Kind use "static";
+
+   package Builder is
+      for Default_Switches ("ada") use ("-g");
+   end Builder;
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-gnatVa", "-gnatw.eH.YD", "-g", "-gnato", "-fstack-check", "-gnatf", "-gnatW8", "-gnateE");
+   end Compiler;
+
+   package Binder is
+      for Default_Switches ("ada") use ("-E");
+   end Binder;
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-M99", "-W8");
+   end Pretty_Printer;
+
+   package Install is
+      for Artifacts ("share/tp7ada-gnoga/tp7ada_rm") use (Project'Object_Dir & "/gnatdoc/*");
+      for Artifacts ("share/tp7ada-gnoga/examples") use ("../examples/*.adb");
+   end Install;
+
+end TP7;

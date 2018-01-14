@@ -1,0 +1,9 @@
+/obj/
+/lib/
+/bin/
+/inst/
+/tf/
+.DS_Store
+*.npp
+LPT1.txt
+examples/*_mesg*.ad?

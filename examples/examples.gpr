@@ -1,0 +1,29 @@
+with "../src/tp7.gpr";
+project Examples is
+
+   for Source_Dirs use (".");
+   for Object_Dir use "../obj";
+   for Main use ("main.adb", "main_mini.adb");
+   for Exec_Dir use "../bin";
+
+   package Builder is
+       for Default_Switches ("ada") use ("-g");
+   end Builder;
+
+   package Compiler is
+       for Default_Switches ("ada") use ("-gnatVa", "-gnatwa", "-g", "-gnato", "-fstack-check", "-gnatf", "-gnatW8", "-gnateE");
+   end Compiler;
+
+   package Binder is
+       for Default_Switches ("ada") use ("-E");
+   end Binder;
+
+   package Pretty_Printer is
+       for Default_Switches ("ada") use ("-M99", "-W8");
+   end Pretty_Printer;
+
+   package Linker is
+       for Default_Switches ("ada") use ("-g", "-Wl,-no_pie");
+   end Linker;
+
+end Examples;

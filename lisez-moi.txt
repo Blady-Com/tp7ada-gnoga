@@ -1,0 +1,293 @@
+		UNITÉS TURBO PASCAL EN ADA
+
+
+I Introduction :
+
+     Après quelques années passées à programmer sur PC en Turbo
+Pascal, je me suis mis à la programmation avec Think Pascal sur
+Macintosh. J'ai immédiatement voulu reprendre quelques uns de mes
+sources en Turbo Pascal. D'où l'idée de reconstituer les unités
+de Borland sur Macintosh.
+
+     Je suis ensuite passé à la programmation Ada sur Mac OS X.
+De ce fait, j'ai migré mes sources Pascal en Ada avec l'utilitaire
+de traduction P2Ada.
+
+     Je me suis d'abord penché sur l'unité Graph qui présente le
+plus de similitude avec le gestionnaire graphique du Macintosh
+: QuickDraw avec les interfaces de programmation CarbonAda. Cela
+a donné la version 1.0 de TP7Ada.
+     Depuis l'arrivé de Quartz le nouveau gestionnaire graphique Mac,
+beaucoup d'appels à QuickDraw sont devenus obsolètes. Je me suis
+alors tourné vers la bibliothèque graphique GTKAda 2 qui a l'avantage
+supplémentaire d'être également présente sur Linux et Windows. Cela
+a donné la version 2.0 de TP7Ada.
+     GTKAda est passé en version 3 suivant GTK+ 3. Cela a donné la version
+3.0 de TP7Ada.
+     GNOGA est apparu en version 1.1a. Cela a donné la version
+10.0 de TP7Ada.
+     Toutes les unités Pascal ont été traduites en Ada mais ne sont pas
+encore totalement fonctionnelles. Le tableau TurboPascal7.0-Ada.html
+récapitule l'avancée des fonctionnalités regroupées par unité.
+
+
+II Description des unités :
+	1) Description de l'unité TP7 :
+
+	Contient les déclarations des types Pascal en deux déclinaisons,
+une la plus compatible avec les types Ada pour éviter les conversions
+lourdes, l'autre avec une représentation en mémoire la plus proche de
+Pascal pour les types composés.
+	Pour le type Pascal String un équivalent est proposé sous la forme
+de chaînes avec terminaison par le caractère nul. Cela permet de conserver
+la taille d'origine ainsi que l'accès caractère par caractère et la
+compatibilité avec Ada.
+	Contient également une fonction de Debug lié à une case à cocher
+par l'utilisateur et une procédure Init.
+
+	2) Description de l'unité System :
+
+	Contient les primitives standard prédéfinies par Turbo Pascal.
+Elle comprend les procédures de contrôle d'exécution, d'allocation
+dynamique de mémoire, d'arithmétique, de manipulation de chaînes
+de caractères, d'entrées / sorties.
+	Certaines non plus de sens avec Ada ou sous Unix, elles sont présentes
+mais renvoies un message d'avertissement si Debug est activé,
+d'autres ont un équivalent Ada donné dans le tableau TurboPascal7.0-Ada.html.
+
+	3) Description de l'unité Printer :
+
+	Contient la variable fichier LST ouvert sur LPT1.txt.
+
+	4) Description de l'unité Graph :
+
+     Dans l'unité on retrouve toutes les primitives graphiques de Borland
+avec les quelques modifications suivantes :
+
+     * Le Gestionnaire d'erreur :
+     L'option prise ici est de ne pas faire de contrôle dans un
+premier temps. On retourne presque toujours "grOk".
+
+     * L'initialisation :
+     Les options choisies sont l'émulation de la carte VGA, en
+mode VGAhi, avec les polices et les motifs GTKAda qui cadre
+le mieux avec ceux du PC.
+     Les procédures permettant d'installer des polices ou des
+gestionnaires d'écrans sont vides et ne font donc rien. (voir le
+code de l'unité)
+
+     * Le gestionnaire de l'écran :
+     L'option choisie est de ne gérer qu'une seule page graphique.
+
+     * Procédures d'affichage point et ligne :
+     La bibliothèque Cairo de dessin 2D a été utilisée.
+
+     * Procédures d'affichage de motifs :
+     Les procédures "DrawPoly" et "FillPoly" comportent le nouveau
+type "PolygonType". Il permet de passer en paramètre un tableau de
+points.
+
+     * Procédures d'affichage de courbes :
+     Les procédures "GetAspectRatio" et "SetAspectRatio" ne sont pas fonctionnelles.
+
+     * Gestionnaire de couleur et palette :
+     La procédure "SetRGBPalette" n'est pas fonctionnelle.
+
+     * Procédures d'affichage Bit-Map :
+     Les procédures ne sont pas fonctionnelles.
+
+     * Gestionnaire de texte :
+     Utilisation des polices de caractères vectorielles CHR traduites en structures Ada.
+     La transposition des caractères DOS Code Page 437 est réalisé partiellement.
+
+	5) Description de l'unité DOS :
+
+	Contient l'ensemble des procédures liées au DOS et à la gestion
+des fichiers, de la date et de l'heure, des variables d'environnement.
+	Certaines non plus de sens sous Unix, elles sont présentes
+mais renvoient un message d'avertissement si Debug est activé.
+
+	6) Description de l'unité CRT :
+
+	Contient l'ensemble des procédures liées à la gestion
+de la fenêtre texte, du clavier et du son.
+
+	7) Description de l'unité Test :
+
+	L'unité Test permet d'ajouter des procédures dans une liste.
+L'utilisateur peut sélectionner les procédures avec des cases à cocher.
+Ces procédures sélectionnées sont alors exécutées en séquence.
+
+	8) Description de l'unité Mouse :
+
+	L'unité Mouse contient l'ensemble des procédures issues de la
+gestion de la souris DOS. Inspirée d'une unité Turbo Pascal, inspirée
+elle-même d'un article paru dans Soft & Micro. Certaines n'ont plus de
+sens ou pas de correspondance avec GTK, elles sont présentes mais
+renvoient un message d'avertissement si Debug est activé.
+
+
+     III Mise en oeuvre des unités TP7Ada :
+
+     Au préalable, le compilateur GNAT GNAT GPL 2017 (avec Ada 2005) et la bibliothèque Gnoga 1.3a
+doivent être installés, voir XNAdaLib-2017 par ailleurs sur Blady.
+
+	Les sources (UTF-8) de la bibliothèque version 10.2a sont :
+	read-me.txt
+	lisez-moi.txt
+	makefile
+Répertoire examples :
+	arty.adb
+	bgidemo.adb
+	courbes.adb
+	editfont.adb
+	exemples_tp7.adb
+	hello_gtkada.adb
+	main_mini.adb
+	main.adb
+	sudoku.adb
+	surfaces.adb
+	examples.gpr
+Répertoire src :
+	tp7-crt.adb			10.2a
+	tp7-crt.ads			2.4a
+	tp7-dos.adb			2.2a
+	tp7-dos.ads			2.2a
+	tp7-graph-fontchr.adb	1.0a
+	tp7-graph.adb		10.2a
+	tp7-graph.ads		10.0a
+	tp7-mouse.adb		10.0a
+	tp7-mouse.ads		10.1a
+	tp7-printer.adb		2.1a
+	tp7-printer.ads		2.1a
+	tp7-system.adb		2.3c
+	tp7-system.ads		2.3a
+	tp7-test.adb		10.0a
+	tp7-test.ads		1.0a
+	tp7.adb				10.2a
+	tp7.ads				10.2a
+	tp7.gpr
+
+     Tout d'abord créer un projet main avec le constructeur de Gnoga :
+$ gnoga_make new main hello_world
+$ cd main
+
+     Installer la bibliotèque ACE (accès Internet requis) :
+$ cd js
+$ git clone https://github.com/ajaxorg/ace-builds.git
+$ cd ..
+
+     Copier vos sources Ada dans le répertoire src et modifier le fichier main.gpr en ajoutant :
+with "TP7";
+
+     Votre programme principal Ada traduit du Turbo Pascal (avec
+l'utilitaire P2Ada par exemple) doit être référencé dans le programme main.adb
+avec la procédure TP7.Init.
+     La création et le lancement de l'exécutable est fait par exemple avec
+les commandes :
+
+$ make
+$ ./bin/main
+
+     La bibliothèque contient un programme principal par défaut
+utilisé pour le test des unités : TP7.Test.Execute, voir main.adb et
+un programme de test minimal, voir main_mini.adb.
+     Le programme se compose d'une fenêtre de contrôle : démarrage et
+arrêt du programme, d'une fenêtre texte (affichage et saisie)
+si l'unité TP7.CRT est appelée sinon utilisation du Terminal,
+d'une fenêtre graphique si l'unité TP7.Graph est appelée.
+
+
+     IV Utilisation et licence :
+
+     Cette bibliothèque est fournie uniquement pour test, telle qu'elle.
+Elle ne doit pas être utilisée pour réaliser quelques logiciels que
+ce soit autre que pour test.
+     Chaque partie du logiciel indiqué appartient aux propriétaires
+cités dans le source.
+     La bibliothèque est utilisable avec la licence CeCILL,
+voir Licence_CeCILL_V2-fr.txt.
+
+
+     V Améliorations :
+
+     L'unité TP7.Graph peut être améliorée :
+     . en gérant les erreurs graphiques
+     . en gérant plus d'une page graphique
+     . en gérant l'affichage bitmap
+
+
+     VI Conclusion :
+
+     J'espère que cette unité vous permettra de tester nombre de
+programmes graphiques sur Macintosh, Unix ou Windows.
+
+
+     VII Historique :
+
+- 10.2a : Adaptation à Gnoga 1.2a:
+		- tp7-graph.adb et tp7-crt.adb: ajout de Elaborate_All (Gnoga.Types.Colors),
+		- tp7.ads et adb : ajout de Main_Loop, réorganisation des panneaux et détermination de la langue
+		en fonction de celle du navigateur.
+- 10.1a : Ajout des traductions des exemples Courbes, Sudoku et Surfaces avec Zanyblue:
+		- tp7.ads et adb : ajout de Zanyblue
+		- tp7-mouse.adb: les coordonnées sont déjà relatives au panneau affiché
+- 10.0a : Adaptation à Gnoga 1.1a:
+		- tp7-crt.adb, tp7-graph.ads et adb, tp7-mouse.ads et adb, tp7-test.adb, tp7.ads et adb
+- 3.1a : Adaptation à GTKAda 3.8:
+		- tp7-mouse.ads et adb : ajout de la constante Scroll_Smooth
+- 3.0a : Adaptation à GTKAda 3.4:
+		- tp7-graph.adb: GDK_Color remplacé par GDK_RGBA,
+		Expose_Event remplacé par Draw, On_Expose_Event remplacé par On_Draw_Event,
+		Modify_Bg remplacé par Override_Background_Color
+		- tp7-mouse.adb : Gdk_Window a migré dans GDK, ada_gdk_move_pointer a disparu,
+		Get_Origin a perdu son paramètre OK, modification de la conversion entier vers numéro de curseur
+		pour éviter les effets d'ajout ou de suppression d'énumérés,
+		Get_X et Get_Y remplacé par Get_Coords, Get_Direction remplacé par Get_Scroll_Direction,
+		implémentation de HideMouse et ShowMouse
+		- tp7-crt.adb: correction Delay1
+		- tp7.adb: Get_String a disparu, Scroll_To_Mark remplacé par Scroll_Mark_Onscreen,
+		Gdk_Window a migré dans GDK
+		- tp7.ads: Gdk_Window a migré dans GDK
+		Amélioration de sudoku.adb.
+- 2.7a : ajout d'un dialogue associé aux boutons de fermetures des fenêtres, ajout de
+		l'utilisation des flèches (gauche, droite, début, fin) et ESC dans la
+		saisie de texte, ajout d'une ligne séparatrice dans la fenêtre de contrôle,
+		la procédure MouseNewPosition est fonctionnelle, correction des procédures
+		Write avec des chaines de caractères à terminaison zéro, ajout de la gestion
+		des polices de caractères vectorielles CHR.
+- 2.6a : ajout de copier (ctrl-c) et coller (ctrl-v) pour le presse-papier GTK avec TP7.CRT,
+		la gestion des touches fléchées et de fonctions F1..F10 avec <shift>, <ctrl> et <alt>,
+		d'un bouton Stop pour arrêter le programme en cours dans TP7,
+		des procédures d'écriture et de lecture de nombres entiers et réels dans TP7.System,
+		de la saisie clavier et de la souris dans TP7.Graph,
+		de la gestion de la souris avec TP7.Mouse et de la gestion des erreurs dans TP7.DOS,
+		ajout des exemples graphiques Courbes, Surfaces et Sudoku.
+- 2.5a : codage complet de l'unité TP7.CRT; ajout de la gestion des tags dans TP7;
+                ajout de Readln d'un entier dans TP7.System, ajout d'un exemple minimal
+		d'utilisation du Terminal ou de TP7.CRT;
+- 2.4a : codage complet de l'unité TP7.DOS; ajout mécanisme automatique de l'init de TP7.CRT;
+		modif itération dans TP7.Test pour éviter un Programm_Error lors d'un abort;
+		modif de l'init de TP7.CRT;
+- 2.3a : codage complet de l'unité TP7.Graph avec les exemples graphiques BGIDemo et Arty;
+		ajout de l'unité TP7.Test; ajout d'une fonction dans l'unité TP7
+		de construction d'une chaine de taille différente de la longueur;
+		utilisation de l'unité TP7.Test dans main;
+- 2.2a : intégration de la saisie de texte à la fenêtre d'affichage du texte
+		et rebasculement des affichages et saisies dans TP7 avec modification
+		des entrées/sorties de TP7.System;
+- 2.1a : codage complet de l'unité TP7.System; ajout d'une fonction
+		et d'une case à cocher Debug, basculement des affichages GTK
+		dans CRT et redéfinition des types fichiers de l'unité TP7;
+		adaptation de Lst dans l'unité TP7.Printer; codage des fonctions
+		Linexx, Arc, Circle, Ellipse dans l'unité TP7.Graph; ajustement
+		des interfaces de l'unité TP7.Dos; reprise des affichages GTK
+		dans l'unité TP7.CRT;
+- 2.0a : première version basée sur GTKAda;
+- 1.0a : première version basée sur CarbonAda.
+
+Pascal Pignard,
+décembre 1988, juin 1994, octobre 2002, septembre-décembre 2011, janvier-novembre 2012,
+janvier 2014, juin 2014, septembre 2015, septembre 2016, janvier 2018.
+http://blady.pagesperso-orange.fr
+
