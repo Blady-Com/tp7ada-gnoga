@@ -39,14 +39,14 @@ package body TP7.Test is
    procedure Add (TestProc : TPProc; TestName : TPString) is
       TestCheckBox : constant Gnoga.Gui.Element.Form.Check_Box_Access :=
         new Gnoga.Gui.Element.Form.Check_Box_Type;
-      TestLabel : Gnoga.Gui.Element.Form.Label_Type;
+      Dummy_TestLabel : Gnoga.Gui.Element.Form.Label_Type;
    begin
       if TestProcs.Is_Empty then
          Get_Ctrl_Panel.Horizontal_Rule;
          TestForm.Create (Get_Ctrl_Panel.all);
       end if;
       TestCheckBox.Create (Form => TestForm, Name => TestName);
-      TestLabel.Create (TestForm, TestCheckBox.all, TestName);
+      Dummy_TestLabel.Create (TestForm, TestCheckBox.all, TestName);
       TestForm.New_Line;
       TestProcs.Append ((TestProc, TestCheckBox));
    end Add;

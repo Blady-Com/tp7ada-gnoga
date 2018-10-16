@@ -3,7 +3,7 @@
 BUILDER=gprbuild
 CLEANER=gprclean
 INSTALLER=gprinstall
-XAdaLibPath=/usr/local/xnadalib-2017
+XAdaLibPath=/usr/local/xnadalib-2018
 PREFIX=$(CURDIR)/inst
 
 all: examples

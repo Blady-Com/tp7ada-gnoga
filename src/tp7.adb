@@ -473,7 +473,7 @@ package body TP7 is
    procedure New_Line (Update_Cursor_Position : Boolean := True) is
    begin
       N1_Mutex.Seize;
-      IntCRTView.InsertNewLine (IntCursorLine, IntCursorColumn);
+      IntCRTView.Insert_New_Line (IntCursorLine, IntCursorColumn);
       IntCursorLine   := IntCursorLine + 1;
       IntCursorColumn := 0;
       if Update_Cursor_Position then
@@ -767,9 +767,9 @@ package body TP7 is
       Deactivate_Key_Handler (IntCRTView);
       -- Force children to fit parent size
       IntCRTView.Fill_Parent;
-      IntCRTView.Set_Highlight_Selected_Word (False);
-      IntCRTView.Set_Highlight_Active_Line (False);
-      IntCRTView.Set_Show_Print_Margin (False);
+      IntCRTView.Highlight_Selected_Word (False);
+      IntCRTView.Highlight_Active_Line (False);
+      IntCRTView.Show_Print_Margin (False);
    end Activate_Win_CRT;
 
 end TP7;

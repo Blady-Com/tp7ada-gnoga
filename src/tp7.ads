@@ -29,10 +29,6 @@ private with Gnoga.Gui.View;
 private with Gnoga.Gui.Base;
 private with Gnoga.Gui.Element.Canvas;
 private with Gnoga.Application.Singleton;
-pragma Elaborate_All (ZanyBlue.Text.Generic_Floats);
--- Needed for : warning: instantiation of "Generic_Buffer" may raise Program_Error
-with ZanyBlue.Text.Generic_Buffer;
-pragma Elaborate_All (ZanyBlue.Text.Generic_Buffer);
 
 package TP7 is
    pragma Elaborate_Body;

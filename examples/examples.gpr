@@ -1,7 +1,7 @@
 with "../src/tp7.gpr";
 project Examples is
 
-   for Source_Dirs use (".");
+   for Source_Dirs use (".", "../tf");
    for Object_Dir use "../obj";
    for Main use ("main.adb", "main_mini.adb");
    for Exec_Dir use "../bin";

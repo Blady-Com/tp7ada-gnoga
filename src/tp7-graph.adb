@@ -694,11 +694,11 @@ package body TP7.Graph is
    begin
       case WriteMode is
          when CopyPut =>
-            Cr.Glogal_Composite_Operation (Gnoga.Gui.Element.Canvas.Context_2D.Source_Over);
+--              Cr.Glogal_Composite_Operation (Gnoga.Gui.Element.Canvas.Context_2D.Source_Over);
             IntOperator    := Gnoga.Gui.Element.Canvas.Context_2D.Source_Over;
             IntGraphResult := grOk;
          when XORPut =>
-            Cr.Glogal_Composite_Operation (Gnoga.Gui.Element.Canvas.Context_2D.Xor_Copy);
+--              Cr.Glogal_Composite_Operation (Gnoga.Gui.Element.Canvas.Context_2D.Xor_Copy);
             IntOperator    := Gnoga.Gui.Element.Canvas.Context_2D.Xor_Copy;
             IntGraphResult := grOk;
          --  TODO : and, or, not
