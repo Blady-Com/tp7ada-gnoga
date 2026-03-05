@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- NOM DU CSU (principal)           : surface.adb
 -- AUTEUR DU CSU                    : Pascal Pignard
--- VERSION DU CSU                   : 10.0a
--- DATE DE LA DERNIERE MISE A JOUR  : 18 avril 2016
+-- VERSION DU CSU                   : 11.0a
+-- DATE DE LA DERNIERE MISE A JOUR  : 05 mars 2026
 -- ROLE DU CSU                      : Représentation graphique de surfaces
 --
 --
@@ -11,9 +11,9 @@
 -- FONCTIONS LOCALES DU CSU         :
 --
 --
--- NOTES                            : Ada 2005, GNOGA WF
+-- NOTES                            : Ada 2005, GNOGA 1.6a
 --
--- COPYRIGHT                        : (c) Pascal Pignard 1988-2016
+-- COPYRIGHT                        : (c) Pascal Pignard 1988-2026
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
 -- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
@@ -23,8 +23,12 @@ with TP7, TP7.System, TP7.Crt, TP7.Graph;
 use TP7, TP7.System, TP7.Crt, TP7.Graph;
 with Surfaces_Mesg.surfaces_Strings; use Surfaces_Mesg.surfaces_Strings;
 with ZanyBlue.Text.Formatting;       use ZanyBlue.Text.Formatting;
+with Real_Arg;
 
 procedure Surfaces is
+
+   function "+" (Real_Value : Real) return Real_Arg.Float_Argument_Type renames Real_Arg.Create;
+
    subtype Integer is TPInteger;
 
    kz      : Real             := 10.0;

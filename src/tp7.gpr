@@ -1,5 +1,4 @@
 with "gnoga";
-with "zanyblue";
 with "lib_components";
 
 project TP7 is

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- NOM DU CSU (spécification)       : tp7.ads
 -- AUTEUR DU CSU                    : Pascal Pignard
--- VERSION DU CSU                   : 10.2a
--- DATE DE LA DERNIERE MISE A JOUR  : 15 septembre 2016
+-- VERSION DU CSU                   : 11.0a
+-- DATE DE LA DERNIERE MISE A JOUR  : 05 mars 2026
 -- ROLE DU CSU                      : Unité d'émulation Turbo Pascal 7.0.
 --
 --
@@ -11,15 +11,14 @@
 -- FONCTIONS LOCALES DU CSU         :
 --
 --
--- NOTES                            : Ada 2005, GNOGA 1.2a
+-- NOTES                            : Ada 2005, GNOGA 1.6a
 --
--- COPYRIGHT                        : (c) Pascal Pignard 2002-2016
+-- COPYRIGHT                        : (c) Pascal Pignard 2002-2026
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
 -- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
 
 with System;
-with ZanyBlue.Text.Generic_Floats;
 private with System.Address_Image;
 private with Ada.Characters.Latin_1;
 private with Ada.Text_IO;
@@ -80,10 +79,6 @@ package TP7 is
    subtype Extented is Long_Long_Float range -1.1e4932 .. 1.1e4932; -- 64 bits target
    subtype Comp is Long_Long_Integer range -2**63 .. 2**63 - 1;
 
-   -- Zanyblue facilities for Real type
-   package Real_Arg is new ZanyBlue.Text.Generic_Floats (Float_Type => Real);
-   function "+" (Real_Value : Real) return Real_Arg.Float_Argument_Type renames Real_Arg.Create;
-
    -- Tips : types defined for record components with corresponding TP size
    type Real1 is digits 6 range -1.7e38 .. 1.7e38;
    for Real1'Size use 6 * 8;
@@ -138,6 +133,7 @@ package TP7 is
    -- Tips : call your code from main with "Init (MyCode'Access);"
    type TPProc is access procedure;
    procedure Init (My_Principal_Proc : TPProc);
+   function Get_Language return String;
    procedure Main_Loop;
 
    -- Tips : call this function to test if user as checked Debug in Win_Ctrl

@@ -1,4 +1,6 @@
 with "../src/tp7.gpr";
+with "zanyblue.gpr";
+
 project Examples is
 
    for Source_Dirs use (".");

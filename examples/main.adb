@@ -9,6 +9,7 @@ with Courbes;
 with Sudoku;
 with Surfaces;
 with EditFont;
+with ZanyBlue.Text.Locales;
 
 procedure main is
 
@@ -23,6 +24,8 @@ begin
    TP7.Test.Add (Surfaces'Access, "Surfaces Plotting Demo");
    TP7.Test.Add (EditFont'Access, "CHR font editing");
    --     TP7.Test.SelectAll;
+   ZanyBlue.Text.Locales.Set_Locale
+     (ZanyBlue.Text.Locales.Make_Locale_Narrow (TP7.Get_Language & ".ISO8859-1"));
    TP7.Main_Loop;
 exception
    when E : others =>

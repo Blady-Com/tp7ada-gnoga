@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- NOM DU CSU (corps)               : tp7.adb
 -- AUTEUR DU CSU                    : Pascal Pignard
--- VERSION DU CSU                   : 10.2a
--- DATE DE LA DERNIERE MISE A JOUR  : 15 septembre 2016
+-- VERSION DU CSU                   : 11.0a
+-- DATE DE LA DERNIERE MISE A JOUR  : 05 mars 2026
 -- ROLE DU CSU                      : Unité d'émulation Turbo Pascal 7.0.
 --
 --
@@ -11,9 +11,9 @@
 -- FONCTIONS LOCALES DU CSU         :
 --
 --
--- NOTES                            : Ada 2005, GNOGA 1.2a
+-- NOTES                            : Ada 2005, GNOGA 1.6a
 --
--- COPYRIGHT                        : (c) Pascal Pignard 2002-2016
+-- COPYRIGHT                        : (c) Pascal Pignard 2002-2026
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
 -- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
@@ -30,7 +30,6 @@ with Gnoga.Gui.Element.Form;
 with Gnoga.Gui.Plugin.Ace_Editor;
 with Gnoga.Gui.Navigator;
 with Gnoga.Types.Key_Codes;
-with ZanyBlue.Text.Locales;
 
 package body TP7 is
 
@@ -672,9 +671,6 @@ package body TP7 is
 
       Gnoga.Application.Title ("TP7Ada");
       Gnoga.Application.Singleton.Initialize (IntWindow);
-      ZanyBlue.Text.Locales.Set_Locale
-        (ZanyBlue.Text.Locales.Make_Locale_Narrow
-           (Gnoga.Gui.Navigator.Language (IntWindow) & ".ISO8859-1"));
       IntGrid.Create
         (IntWindow,
          ((Gnoga.Gui.View.Grid.COL, Gnoga.Gui.View.Grid.COL),
@@ -711,6 +707,11 @@ package body TP7 is
       -- Needed for Safari special keys
       IntWindow.On_Key_Down_Handler (On_Key_Press_Handler'Access);
    end Init;
+
+   function Get_Language return String is
+   begin
+      return Gnoga.Gui.Navigator.Language (IntWindow);
+   end;
 
    function Get_Ctrl_Panel return Gnoga.Gui.View.Pointer_To_View_Base_Class is
    begin
