@@ -15,7 +15,7 @@
 --
 -- COPYRIGHT                        : (c) Pascal Pignard 2010-2016
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
--- CONTACT                          : http://blady.pagesperso-orange.fr
+-- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
 
 with TP7.System, TP7.Graph, TP7.Crt, TP7.Mouse;

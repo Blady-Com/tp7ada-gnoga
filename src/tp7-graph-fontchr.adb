@@ -15,7 +15,7 @@
 --
 -- COPYRIGHT                        : (c) Pascal Pignard 2012
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
--- CONTACT                          : http://blady.pagesperso-orange.fr
+-- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
 
 separate (tp7.Graph)

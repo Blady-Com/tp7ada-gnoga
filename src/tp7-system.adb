@@ -15,7 +15,7 @@
 --
 -- COPYRIGHT                        : (c) Pascal Pignard 2002-2015
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
--- CONTACT                          : http://blady.pagesperso-orange.fr
+-- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
 
 with Ada.Characters.Handling;

@@ -15,7 +15,7 @@
 --
 -- COPYRIGHT                        : (c) Pascal Pignard 1988-2016
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
--- CONTACT                          : http://blady.pagesperso-orange.fr
+-- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
 -- Translated on 3-May-2012 by (New) P2Ada v. 28-Oct-2009
 
