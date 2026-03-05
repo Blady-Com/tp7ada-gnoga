@@ -1,6 +1,6 @@
-/obj/
-/lib/
-/bin/
+obj/
+lib/
+bin/
 /inst/
 /tf/
 .DS_Store
