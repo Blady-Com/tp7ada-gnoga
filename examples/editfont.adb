@@ -20,25 +20,25 @@
 -- Translated on 24-Oct-2012 by (New) P2Ada v. 28-Oct-2009
 
 with TP7.System, TP7.Graph, TP7.Crt;
-use  TP7, TP7.System, TP7.Graph, TP7.Crt;
+use TP7, TP7.System, TP7.Graph, TP7.Crt;
 
 procedure EditFont is
 
-   MaxBuff : constant := 30000;
+   MaxBuff : constant := 30_000;
 
    type Tampon is array (0 .. MaxBuff) of Byte1;
    --     type BuffPtr is access Tampon;
    subtype Char03 is String (1 .. 4); --array (0 .. 3) of Char;
    --  procedure Dispose is new Ada.Unchecked_Deallocation(Tampon, BuffPtr);
    type Partie2 is record
-   -- Font description : chars until <CR><LF><EOF>
-   -- Header size : word
-   -- Font name : 4 chars
-   -- Font file size : word
-   -- Font driver major version : byte
-   -- Font driver minor version : byte
-   -- ID3 : word -> 16#0100#
-   -- Zeros : padding until end of the header
+      -- Font description : chars until <CR><LF><EOF>
+      -- Header size : word
+      -- Font name : 4 chars
+      -- Font file size : word
+      -- Font driver major version : byte
+      -- Font driver minor version : byte
+      -- ID3 : word -> 16#0100#
+      -- Zeros : padding until end of the header
       Description : String (1 .. 256);
       DebPart3    : Integer;
       Nom         : Char03;
@@ -47,15 +47,15 @@ procedure EditFont is
       Minor       : Byte;
    end record;
    type Partie3 is record
-   -- ID4 : byte -> 16#2B# (stroke font)
-   -- Number of character : word
-   -- Undefined : byte
-   -- First defined character : ASCII
-   -- Offset of character definitions : word
-   -- Scan flag : byte
-   -- Distance from origin to top of capital : byte
-   -- Distance from origin to baseline : byte
-   -- Distance from origin to bottom descender : byte
+      -- ID4 : byte -> 16#2B# (stroke font)
+      -- Number of character : word
+      -- Undefined : byte
+      -- First defined character : ASCII
+      -- Offset of character definitions : word
+      -- Scan flag : byte
+      -- Distance from origin to top of capital : byte
+      -- Distance from origin to baseline : byte
+      -- Distance from origin to bottom descender : byte
       NbrCar        : Byte;
       FirstCar      : Char;
       ShiftDef      : Integer;
@@ -105,8 +105,7 @@ procedure EditFont is
       for I in reverse 0 .. 3 loop
          Assign_String
            (Chn,
-            Chn +
-            P2Ada_no_keyword_Digits (Integer ((Word1 (X) / (2 ** (4 * I))) and 16#000F#)));
+            Chn + P2Ada_no_keyword_Digits (Integer ((Word1 (X) / (2**(4 * I))) and 16#000F#)));
       end loop;
       Result_Hexa := Chn;
       return Result_Hexa;
@@ -164,9 +163,7 @@ procedure EditFont is
          declare
             P2Ada_Var_1 : CmdPart renames Cmd.all;
          begin
-            Com :=
-              Byte ((Word1 (PX) and 16#80#) / (2 ** 6) +
-                    (Word1 (PY) and 16#80#) / (2 ** 7));
+            Com := Byte ((Word1 (PX) and 16#80#) / (2**6) + (Word1 (PY) and 16#80#) / (2**7));
             case Com is
                when 2 =>
                   P2Ada_Var_1.CmdType := Move;
@@ -199,8 +196,7 @@ procedure EditFont is
          while P2Ada_Var_2.BuffFont (Ind1) /= 0 loop
 
             DecodeVect
-              (Byte (P2Ada_Var_2.BuffFont (Ind1)),
-               Byte (P2Ada_Var_2.BuffFont (Ind1 + 1)));
+              (Byte (P2Ada_Var_2.BuffFont (Ind1)), Byte (P2Ada_Var_2.BuffFont (Ind1 + 1)));
             Ind1 := Ind1 + 2;
          end loop;
       end; -- [P2Ada]: end of WITH
@@ -252,20 +248,20 @@ procedure EditFont is
             end loop;
             Ind := Ind + 1;
             --PP          P2Ada_Var_4.Part2Ptr:=Ptr(DSeg,Ofs(P2Ada_Var_4.BuffFont(Ind)));
-            Font.Part2Ptr.DebPart3 := Byte (Font.BuffFont (Ind)) +
-                                      Byte (Font.BuffFont (Ind + 1)) * 256;
-            Ind                    := Ind + 2;
+            Font.Part2Ptr.DebPart3 :=
+              Byte (Font.BuffFont (Ind)) + Byte (Font.BuffFont (Ind + 1)) * 256;
+            Ind := Ind + 2;
             for Index in Char03'Range loop
                Font.Part2Ptr.Nom (Index) := Chr (Byte (Font.BuffFont (Ind + Index - 1)));
             end loop;
             Ind                    := Ind + 4;
-            Font.Part2Ptr.DataSize := Byte (Font.BuffFont (Ind)) +
-                                      Byte (Font.BuffFont (Ind + 1)) * 256;
-            Ind                    := Ind + 2;
-            Font.Part2Ptr.Major    := Byte (Font.BuffFont (Ind));
-            Ind                    := Ind + 1;
-            Font.Part2Ptr.Minor    := Byte (Font.BuffFont (Ind));
-            Ind                    := Font.Part2Ptr.DebPart3;
+            Font.Part2Ptr.DataSize :=
+              Byte (Font.BuffFont (Ind)) + Byte (Font.BuffFont (Ind + 1)) * 256;
+            Ind                 := Ind + 2;
+            Font.Part2Ptr.Major := Byte (Font.BuffFont (Ind));
+            Ind                 := Ind + 1;
+            Font.Part2Ptr.Minor := Byte (Font.BuffFont (Ind));
+            Ind                 := Font.Part2Ptr.DebPart3;
             -- [P2Ada]: WITH instruction
             declare
                P2Ada_Var_5 : Partie2 renames P2Ada_Var_4.Part2Ptr;
@@ -284,13 +280,13 @@ procedure EditFont is
                      end if;
                   end To_Shortint;
                begin
-                  Ind                         := Ind + 1;
-                  Font.Part3Ptr.NbrCar        := Byte (Font.BuffFont (Ind));
-                  Ind                         := Ind + 3;
-                  Font.Part3Ptr.FirstCar      := Chr (Byte (Font.BuffFont (Ind)));
-                  Ind                         := Ind + 1;
-                  Font.Part3Ptr.ShiftDef      := Byte (Font.BuffFont (Ind)) +
-                                                 Byte (Font.BuffFont (Ind + 1)) * 256;
+                  Ind                    := Ind + 1;
+                  Font.Part3Ptr.NbrCar   := Byte (Font.BuffFont (Ind));
+                  Ind                    := Ind + 3;
+                  Font.Part3Ptr.FirstCar := Chr (Byte (Font.BuffFont (Ind)));
+                  Ind                    := Ind + 1;
+                  Font.Part3Ptr.ShiftDef :=
+                    Byte (Font.BuffFont (Ind)) + Byte (Font.BuffFont (Ind + 1)) * 256;
                   Ind                         := Ind + 3;
                   Font.Part3Ptr.HauteurMaj    := To_Shortint (Byte (Font.BuffFont (Ind)));
                   Ind                         := Ind + 1;
@@ -301,28 +297,29 @@ procedure EditFont is
                   --PP
                   --P2Ada_Var_4.AdrCarPtr:=Ptr(DSeg,Ofs(P2Ada_Var_4.BuffFont(DebAdrCar)));
                   for Index in
-                       Font.Part3Ptr.FirstCar ..
-                       Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
+                    Font.Part3Ptr.FirstCar ..
+                      Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
                   loop
                      Font.AdrCarPtr (Index) :=
-                       Byte (Font.BuffFont (DebAdrCar +
-                                            (Ord (Index) - Ord (Font.Part3Ptr.FirstCar)) * 2)) +
-                       Byte (Font.BuffFont (DebAdrCar +
-                                            (Ord (Index) - Ord (Font.Part3Ptr.FirstCar)) * 2 +
-                                            1)) *
-                       256;
+                       Byte
+                         (Font.BuffFont
+                            (DebAdrCar + (Ord (Index) - Ord (Font.Part3Ptr.FirstCar)) * 2)) +
+                       Byte
+                           (Font.BuffFont
+                              (DebAdrCar + (Ord (Index) - Ord (Font.Part3Ptr.FirstCar)) * 2 + 1)) *
+                         256;
                   end loop;
                   DebTailleCar := P2Ada_Var_5.DebPart3 + 16#10# + 2 * P2Ada_Var_6.NbrCar;
                   --PP
                   --P2Ada_Var_4.TailleCarPtr:=Ptr(DSeg,Ofs(P2Ada_Var_4.BuffFont(DebTailleCar)));
                   for Index in
-                       Font.Part3Ptr.FirstCar ..
-                       Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
+                    Font.Part3Ptr.FirstCar ..
+                      Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
                   loop
                      Font.TailleCarPtr (Index) :=
-                       Byte (Font.BuffFont (DebTailleCar +
-                                            Ord (Index) -
-                                            Ord (Font.Part3Ptr.FirstCar)));
+                       Byte
+                         (Font.BuffFont
+                            (DebTailleCar + Ord (Index) - Ord (Font.Part3Ptr.FirstCar)));
                   end loop;
                   DebDef               := P2Ada_Var_5.DebPart3 + 16#10# + 3 * P2Ada_Var_6.NbrCar;
                   P2Ada_Var_6.ShiftDef := DebDef;
@@ -340,16 +337,14 @@ procedure EditFont is
                   Write ("   ");
                   for Rang in 0 .. P2Ada_Var_6.NbrCar - 1 loop
                      if (P2Ada_Var_4.AdrCarPtr (Chr (Ord (P2Ada_Var_6.FirstCar) + Rang)) /= 0) or
-                        (P2Ada_Var_4.TailleCarPtr (Chr (Ord (P2Ada_Var_6.FirstCar) + Rang)) /=
-                         0)
+                       (P2Ada_Var_4.TailleCarPtr (Chr (Ord (P2Ada_Var_6.FirstCar) + Rang)) /= 0)
                      then
                         Car := Chr (Ord (P2Ada_Var_6.FirstCar) + Rang);
                         Write (+Car);
                         AnalyseCar
                           (DebDef +
                            P2Ada_Var_4.AdrCarPtr (Chr (Ord (P2Ada_Var_6.FirstCar) + Rang)),
-                           DebFont (Car),
-                           FinFont (Car));
+                           DebFont (Car), FinFont (Car));
                      else
                         Writeln;
                         Writeln ("erreur" + Car);
@@ -459,8 +454,7 @@ procedure EditFont is
          ClearViewPort;
          AffichCar (Car);
          OutTextXY
-           (10,
-            GetMaxY - 10,
+           (10, GetMaxY - 10,
             "précédente: fléche bas, suivante: fléche haut ," + "zoom: F5, sortir:Esc");
          Ch := ReadKey;
          if Ch = Chr (0) then
@@ -591,8 +585,7 @@ procedure EditFont is
 
       procedure DeplaceCurs is
       begin
-         AffInv
-           ("Deplace: <-,->," + Chr (25) + ',' + Chr (26) + ",+,-,Espace,Positon,Quitte ?");
+         AffInv ("Deplace: <-,->," + Chr (25) + ',' + Chr (26) + ",+,-,Espace,Positon,Quitte ?");
          Xanc := PX;
          Yanc := PY;
          loop
@@ -642,8 +635,7 @@ procedure EditFont is
 
       procedure Ligne is
       begin
-         AffInv
-           ("Deplace: <-,->," + Chr (25) + ',' + Chr (26) + ",+,-,Espace,Positon,Quitte ?");
+         AffInv ("Deplace: <-,->," + Chr (25) + ',' + Chr (26) + ",+,-,Espace,Positon,Quitte ?");
          Xanc := PX;
          Yanc := PY;
          loop
@@ -796,12 +788,12 @@ procedure EditFont is
             begin
                Car := Chr (DebCode + Rang1);
                Write (+Car);
-               Xmax                                  := -64;
-               Xmin                                  := 63;
-               Ymax                                  := -64;
-               Ymin                                  := 63;
-               P2Ada_Var_15.AdrCarPtr (Chr (Rang1))  := CmdInd - DebCmd;
-               Cmd                                   := DebFont (Chr (DebCode + Rang1));
+               Xmax                                 := -64;
+               Xmin                                 := 63;
+               Ymax                                 := -64;
+               Ymin                                 := 63;
+               P2Ada_Var_15.AdrCarPtr (Chr (Rang1)) := CmdInd - DebCmd;
+               Cmd                                  := DebFont (Chr (DebCode + Rang1));
                while Cmd /= null loop
                   -- [P2Ada]: WITH instruction
                   declare
@@ -831,8 +823,8 @@ procedure EditFont is
                   Cmd := Cmd.CmdSui;
                end loop;
                --PP            FillChar(Font.BuffFont(CmdInd),3,0);
-               CmdInd                                   := CmdInd + (3);
-               P2Ada_Var_15.TailleCarPtr (Chr (Rang1))  := Xmax - Xmin;
+               CmdInd                                  := CmdInd + (3);
+               P2Ada_Var_15.TailleCarPtr (Chr (Rang1)) := Xmax - Xmin;
                -- [P2Ada]: WITH instruction
                declare
                   P2Ada_Var_17 : Partie3 renames P2Ada_Var_15.Part3Ptr;
@@ -947,8 +939,7 @@ procedure EditFont is
       Writeln (f, "new StructDescFont'(");
       Writeln
         (f,
-         "  Description    => new String'(""" +
-         BlankCtrlChar (Font.Part2Ptr.Description) +
+         "  Description    => new String'(""" + BlankCtrlChar (Font.Part2Ptr.Description) +
          """),");
       Writeln (f, "  Name           => """ + Font.Part2Ptr.Nom + """,");
       Writeln (f, "  MajorVersion   => " + Font.Part2Ptr.Major'Img + ",");
@@ -961,8 +952,7 @@ procedure EditFont is
       else
          Writeln (f, " CharWidths     => new TabCharWidth'(");
          for Ind in
-              Font.Part3Ptr.FirstCar ..
-              Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
+           Font.Part3Ptr.FirstCar .. Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
          loop
             Write (f, Ord (Ind)'Img + " => " + Font.TailleCarPtr (Ind)'Img);
             if Ind /= Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1) then
@@ -980,8 +970,7 @@ procedure EditFont is
       else
          Writeln (f, " CharCmds     => new TabCharCmd'(");
          for Ind in
-              Font.Part3Ptr.FirstCar ..
-              Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
+           Font.Part3Ptr.FirstCar .. Chr (Ord (Font.Part3Ptr.FirstCar) + Font.Part3Ptr.NbrCar - 1)
          loop
             declare
                cmd : CmdPtr := DebFont (Ind);
@@ -993,24 +982,14 @@ procedure EditFont is
                   if cmd.CmdSui = null then
                      Write
                        (f,
-                        "1 => (" +
-                        Commande'Image (cmd.CmdType) +
-                        ", " +
-                        cmd.X'Img +
-                        ", " +
-                        cmd.Y'Img +
-                        "))");
+                        "1 => (" + Commande'Image (cmd.CmdType) + ", " + cmd.X'Img + ", " +
+                        cmd.Y'Img + "))");
                   else
                      while cmd /= null loop
                         Write
                           (f,
-                           "(" +
-                           Commande'Image (cmd.CmdType) +
-                           ", " +
-                           cmd.X'Img +
-                           ", " +
-                           cmd.Y'Img +
-                           ")");
+                           "(" + Commande'Image (cmd.CmdType) + ", " + cmd.X'Img + ", " +
+                           cmd.Y'Img + ")");
                         cmd := cmd.CmdSui;
                         if cmd /= null then
                            Write (f, ", ");
@@ -1059,44 +1038,42 @@ begin
       Ch := UpCase (ReadKey);
       Writeln (+Ch);
       case Ch is
-      when 'C' =>
-         Write ("Caractère < A > ? ");
-         Car := ReadKey;
-         if Car = Chr(13) then
-            Car := 'A';
-         end if;
-         Writeln (+Car);
-      when 'A' =>
-         DefilFont;
-      when 'E' =>
-         EditFont (Car);
-      when 'H' =>
-         DecodeFont (Font);
-      when 'L' =>
-         ListCar (Car);
-      when 'N' =>
-         Write ("nom < Font > ? ");
-         Readln (Font.NomFont);
-      when 'R' => -- [P2Ada]: WITH instruction
-         declare
-            P2Ada_Var_23 : CodeFont renames Font;
-         begin
-            AnalyseCar
-              (P2Ada_Var_23.Part2Ptr.DebPart3 +
-               P2Ada_Var_23.Part3Ptr.ShiftDef +
-               P2Ada_Var_23.AdrCarPtr (Chr (Ord (Car) - Ord (P2Ada_Var_23.Part3Ptr.FirstCar))),
-               DebFont (Car),
-               FinFont (Car));
-         end; -- [P2Ada]: end of WITH
-      when 'S' =>
-         SauveFont (Font);
-      when 'Z' =>
-         DebFont (Car) := null;
-         FinFont (Car) := null;
-      when 'D' =>
-         CodeAda (Font);
-      when others =>
-         null;  -- [P2Ada]: no otherwise / else in Pascal
+         when 'C' =>
+            Write ("Caractère < A > ? ");
+            Car := ReadKey;
+            if Car = Chr (13) then
+               Car := 'A';
+            end if;
+            Writeln (+Car);
+         when 'A' =>
+            DefilFont;
+         when 'E' =>
+            EditFont (Car);
+         when 'H' =>
+            DecodeFont (Font);
+         when 'L' =>
+            ListCar (Car);
+         when 'N' =>
+            Write ("nom < Font > ? ");
+            Readln (Font.NomFont);
+         when 'R' => -- [P2Ada]: WITH instruction
+            declare
+               P2Ada_Var_23 : CodeFont renames Font;
+            begin
+               AnalyseCar
+                 (P2Ada_Var_23.Part2Ptr.DebPart3 + P2Ada_Var_23.Part3Ptr.ShiftDef +
+                  P2Ada_Var_23.AdrCarPtr (Chr (Ord (Car) - Ord (P2Ada_Var_23.Part3Ptr.FirstCar))),
+                  DebFont (Car), FinFont (Car));
+            end; -- [P2Ada]: end of WITH
+         when 'S' =>
+            SauveFont (Font);
+         when 'Z' =>
+            DebFont (Car) := null;
+            FinFont (Car) := null;
+         when 'D' =>
+            CodeAda (Font);
+         when others =>
+            null;  -- [P2Ada]: no otherwise / else in Pascal
       end case;
       if Ch = Chr (0) then
          Ch := ReadKey;

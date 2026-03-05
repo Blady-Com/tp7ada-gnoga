@@ -21,7 +21,7 @@
 
 with TP7, TP7.System, TP7.Crt, TP7.Graph;
 use TP7, TP7.System, TP7.Crt, TP7.Graph;
-with Surfaces_Mesg.Surfaces_Strings; use Surfaces_Mesg.Surfaces_Strings;
+with Surfaces_Mesg.surfaces_Strings; use Surfaces_Mesg.surfaces_Strings;
 with ZanyBlue.Text.Formatting;       use ZanyBlue.Text.Formatting;
 
 procedure Surfaces is
@@ -171,7 +171,7 @@ procedure Surfaces is
       end loop;
    end InitTab;
 
-   procedure Projette (X, Y, Z : Real; Xg, Yg : in out Integer) is
+   procedure Projette (X, Y, Z : Real; Xg, Yg : out Integer) is
    begin
       Xg := WindowX (Proj (1, 1) * X + Proj (1, 2) * Y + Proj (1, 3) * Z);
       Yg := WindowY (Proj (2, 1) * X + Proj (2, 2) * Y + Proj (2, 3) * Z);
@@ -186,7 +186,7 @@ procedure Surfaces is
       Y     := infy;
       h     := StepX;
       InitTab (Haut, 0);
-      InitTab (Bas, 1000);
+      InitTab (Bas, 1_000);
       for i in 0 .. NbrCourbes loop
          X := infx;
          Projette (X, Y, Z (X, Y), xpos, ypos);
@@ -215,7 +215,7 @@ procedure Surfaces is
       X := infx;
       h := StepY;
       InitTab (Haut, 0);
-      InitTab (Bas, 1000);
+      InitTab (Bas, 1_000);
       for i in 0 .. NbrCourbes loop
          Y := infy;
          Projette (X, Y, Z (X, Y), xpos, ypos);

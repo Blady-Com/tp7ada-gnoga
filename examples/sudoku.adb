@@ -137,7 +137,7 @@ procedure Sudoku is
    -- Renvoie le compteur horaire interne en milisecondes.
    function HorlogeMS return Natural is
    begin
-      return Natural (Ada.Calendar.Seconds (Ada.Calendar.Clock) * 1000.0);
+      return Natural (Ada.Calendar.Seconds (Ada.Calendar.Clock) * 1_000.0);
    end HorlogeMS;
 
    procedure Affiche_Chiffre (Ligne, Colonne : Integer; Chiffre : Integer) is
@@ -158,9 +158,7 @@ procedure Sudoku is
       type ChiffresPossibles is array (Chiffre range 1 .. 9) of Boolean;
       function NumCarré (Ligne, Colonne : Indice) return Indice;
       function EstAligné
-        (DansCarré        : Indice;
-         Valeur           : Chiffre;
-         SaufLig, SaufCol : Chiffre) return Boolean;
+        (DansCarré : Indice; Valeur : Chiffre; SaufLig, SaufCol : Chiffre) return Boolean;
       procedure Imprime;
       function Résolu return Boolean;
       procedure Prend (Ligne, Colonne : Indice);
@@ -214,9 +212,7 @@ procedure Sudoku is
       end NumCarré;
 
       function EstAligné
-        (DansCarré        : Indice;
-         Valeur           : Chiffre;
-         SaufLig, SaufCol : Chiffre) return Boolean
+        (DansCarré : Indice; Valeur : Chiffre; SaufLig, SaufCol : Chiffre) return Boolean
       is
          NbVal, ValCar : Natural := 0;
       begin
@@ -271,11 +267,7 @@ procedure Sudoku is
                if Grille.RetourneValeursPossibles (Ligne, Colonne) (Valeur) then
                   Writeln
                     (Format_RULE
-                       (+3,
-                        +Ligne,
-                        +Colonne,
-                        +Grille.NumCarré (Ligne, Colonne),
-                        +Valeur));
+                       (+3, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne), +Valeur));
                   Grille.SupprimeValeur (Ligne, Colonne, Valeur);
                end if;
             end loop;
@@ -428,15 +420,10 @@ procedure Sudoku is
                   then
                      Writeln
                        (Format_RULE
-                          (+1,
-                           +Ligne,
-                           +Colonne,
-                           +Grille.NumCarré (Ligne, Colonne),
+                          (+1, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne),
                            +Grille.RetourneValeur (Ligne, Colonne)));
                      Grille.SupprimeValeur
-                       (Ligne,
-                        Colonne2,
-                        Grille.RetourneValeur (Ligne, Colonne));
+                       (Ligne, Colonne2, Grille.RetourneValeur (Ligne, Colonne));
                   end if;
                end loop;
             end if;
@@ -469,10 +456,7 @@ procedure Sudoku is
                if ValeurAPositionner /= 0 then
                   Writeln
                     (Format_RULE
-                       (+4,
-                        +Ligne,
-                        +Colonne,
-                        +Grille.NumCarré (Ligne, Colonne),
+                       (+4, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne),
                         +ValeurAPositionner));
                   Grille.PositionneValeur (Ligne, Colonne, ValeurAPositionner);
                end if;
@@ -537,15 +521,10 @@ procedure Sudoku is
                   then
                      Writeln
                        (Format_RULE
-                          (+2,
-                           +Ligne,
-                           +Colonne,
-                           +Grille.NumCarré (Ligne, Colonne),
+                          (+2, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne),
                            +Grille.RetourneValeur (Ligne, Colonne)));
                      Grille.SupprimeValeur
-                       (Ligne2,
-                        Colonne,
-                        Grille.RetourneValeur (Ligne, Colonne));
+                       (Ligne2, Colonne, Grille.RetourneValeur (Ligne, Colonne));
                   end if;
                end loop;
             end if;
@@ -578,10 +557,7 @@ procedure Sudoku is
                if ValeurAPositionner /= 0 then
                   Writeln
                     (Format_RULE
-                       (+5,
-                        +Ligne,
-                        +Colonne,
-                        +Grille.NumCarré (Ligne, Colonne),
+                       (+5, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne),
                         +ValeurAPositionner));
                   Grille.PositionneValeur (Ligne, Colonne, ValeurAPositionner);
                end if;
@@ -647,15 +623,10 @@ procedure Sudoku is
                         then
                            Writeln
                              (Format_RULE
-                                (+3,
-                                 +Ligne,
-                                 +Colonne,
-                                 +Grille.NumCarré (Ligne, Colonne),
+                                (+3, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne),
                                  +Grille.RetourneValeur (Ligne, Colonne)));
                            Grille.SupprimeValeur
-                             (Ligne2,
-                              Colonne2,
-                              Grille.RetourneValeur (Ligne, Colonne));
+                             (Ligne2, Colonne2, Grille.RetourneValeur (Ligne, Colonne));
                         end if;
                      end loop;
                   end loop;
@@ -677,8 +648,7 @@ procedure Sudoku is
                              ((Carré - 1) rem 3) * 3 + 1 .. ((Carré - 1) rem 3) * 3 + 3
                            loop
                               if Ligne2 /= Ligne or Colonne2 /= Colonne then
-                                 if Grille.RetourneValeursPossibles (Ligne2, Colonne2)
-                                     (Valeur)
+                                 if Grille.RetourneValeursPossibles (Ligne2, Colonne2) (Valeur)
                                  then
                                     Seul := False;
                                     exit DoubleBoucle;
@@ -698,10 +668,7 @@ procedure Sudoku is
                   if ValeurAPositionner /= 0 then
                      Writeln
                        (Format_RULE
-                          (+6,
-                           +Ligne,
-                           +Colonne,
-                           +Grille.NumCarré (Ligne, Colonne),
+                          (+6, +Ligne, +Colonne, +Grille.NumCarré (Ligne, Colonne),
                            +ValeurAPositionner));
                      Grille.PositionneValeur (Ligne, Colonne, ValeurAPositionner);
                   end if;
@@ -770,15 +737,9 @@ procedure Sudoku is
    end Ordonanceur;
 
    G : Grille.TGrille :=
-     ((0, 0, 6, 5, 0, 0, 4, 0, 0),
-      (5, 9, 4, 6, 0, 0, 3, 8, 0),
-      (0, 0, 0, 7, 4, 0, 5, 0, 9),
-      (3, 0, 8, 0, 0, 0, 6, 0, 0),
-      (0, 0, 0, 3, 0, 4, 0, 0, 0),
-      (0, 0, 2, 0, 0, 0, 8, 0, 3),
-      (6, 0, 9, 0, 2, 1, 0, 0, 0),
-      (0, 8, 1, 0, 0, 5, 9, 3, 6),
-      (0, 0, 5, 0, 0, 3, 1, 0, 0));
+     ((0, 0, 6, 5, 0, 0, 4, 0, 0), (5, 9, 4, 6, 0, 0, 3, 8, 0), (0, 0, 0, 7, 4, 0, 5, 0, 9),
+      (3, 0, 8, 0, 0, 0, 6, 0, 0), (0, 0, 0, 3, 0, 4, 0, 0, 0), (0, 0, 2, 0, 0, 0, 8, 0, 3),
+      (6, 0, 9, 0, 2, 1, 0, 0, 0), (0, 8, 1, 0, 0, 5, 9, 3, 6), (0, 0, 5, 0, 0, 3, 1, 0, 0));
 
    procedure Affiche_Grille is
    begin

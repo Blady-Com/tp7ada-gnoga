@@ -21,7 +21,7 @@
 
 with TP7.System, TP7.Graph, TP7.Crt, TP7.Mouse;
 use TP7, TP7.System, TP7.Graph, TP7.Crt, TP7.Mouse;
-with courbes_mesg.courbes_Strings; use courbes_mesg.courbes_Strings;
+with Courbes_Mesg.courbes_Strings; use Courbes_Mesg.courbes_Strings;
 
 procedure Courbes is
    subtype Integer is TPInteger;
@@ -246,10 +246,7 @@ procedure Courbes is
    procedure RLine (X1, Y1, X2, Y2 : Real) is
    begin
       Line
-        (Round (AX * X1 + BX),
-         Round (AY * Y1 + BY),
-         Round (AX * X2 + BX),
-         Round (AY * Y2 + BY));
+        (Round (AX * X1 + BX), Round (AY * Y1 + BY), Round (AX * X2 + BX), Round (AY * Y2 + BY));
    end RLine;
 
    procedure RMoveTo (X, Y : Real) is
@@ -316,9 +313,7 @@ procedure Courbes is
                      when others =>
                         null;
                   end case;
-                  if (VX1 + RelX > 0) and
-                    (VX1 + RelX < GetMaxX) and
-                    (VY1 + RelY > 15) and
+                  if (VX1 + RelX > 0) and (VX1 + RelX < GetMaxX) and (VY1 + RelY > 15) and
                     (VY1 + RelY < GetMaxY - 10)
                   then
                      SetColor (BackColor);
@@ -359,9 +354,7 @@ procedure Courbes is
                      when others =>
                         null;
                   end case;
-                  if (VX2 + RelX > 0) and
-                    (VX2 + RelX < GetMaxX) and
-                    (VY2 + RelY > 15) and
+                  if (VX2 + RelX > 0) and (VX2 + RelX < GetMaxX) and (VY2 + RelY > 15) and
                     (VY2 + RelY < GetMaxY - 10)
                   then
                      SetColor (BackColor);
@@ -608,10 +601,10 @@ procedure Courbes is
       Rewrite (FichPlot);
       Writeln (FichPlot, "IN; SP1; SC 0,20000,0,20000;");
       AffText (Format_LIPR);
-      AX := 20000.0 / (XMax - XMin);
-      BX := 20000.0 * XMin / (XMin - XMax);
-      AY := 20000.0 / (YMax - YMin);
-      BY := 20000.0 * YMax / (YMax - YMin);
+      AX := 20_000.0 / (XMax - XMin);
+      BX := 20_000.0 * XMin / (XMin - XMax);
+      AY := 20_000.0 / (YMax - YMin);
+      BY := 20_000.0 * YMax / (YMax - YMin);
       X  := 0.0;
       Y  := 0.0;
       FuncPtr (X, Y, TMin);
@@ -659,10 +652,8 @@ procedure Courbes is
       PutImage (1, GetMaxY / 2, WindPtr2, NormalPut);
       SetColor (WColor);
       Rectangle
-        (Round (AX * XMin + BX + Real (VX)),
-         Round (AY * YMin + BY + Real (VY)),
-         Round (AX * XMax + BX + Real (VX)),
-         Round (AY * YMax + BY + Real (VY)));
+        (Round (AX * XMin + BX + Real (VX)), Round (AY * YMin + BY + Real (VY)),
+         Round (AX * XMax + BX + Real (VX)), Round (AY * YMax + BY + Real (VY)));
       AX := Real (WMaxX) / (XMax - XMin);
       BX := Real (WMaxX) * XMin / (XMin - XMax);
       AY := Real (WMaxY) / (YMin - YMax);
@@ -710,8 +701,8 @@ begin
          null;
    end case;
 
-   GetMem (WindPtr1, 53000);
-   GetMem (WindPtr2, 53000);
+   GetMem (WindPtr1, 53_000);
+   GetMem (WindPtr2, 53_000);
    SetTextJustify (CenterText, CenterText);
    SetColor (WColor);
    Rectangle (0, 15, GetMaxX, GetMaxY - 10);
@@ -741,7 +732,7 @@ begin
          begin
             if ch = Format_DRAW (1) then
                Ouvrir;
-            --  elsif Ch = Format_VAL(1) then Valeur;
+               --  elsif Ch = Format_VAL(1) then Valeur;
             elsif ch = Format_ZOOM (1) then
                Zoom;
             elsif ch = Format_HPGL (1) then
@@ -761,7 +752,7 @@ begin
             case LastXRelease (1) is
                when 0 .. 63 =>
                   Ouvrir;
-               --  64..127: Valeur;
+                  --  64..127: Valeur;
                when 128 .. 191 =>
                   Zoom;
                when 192 .. 255 =>
