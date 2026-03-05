@@ -98,10 +98,7 @@ package TP7.Mouse is
    procedure MouseSetGraphBlock (Cursor : Integer);
    -- Define graphics mode cursor style with XPM string pixmap definition
    procedure MouseSetGraphBlock
-     (Source             : String;
-      Mask               : String;
-      FGColor, BGColor   : Integer;
-      HotSpotX, HotSpotY : Integer);
+     (Source : String; Mask : String; FGColor, BGColor : Integer; HotSpotX, HotSpotY : Integer);
    -- Define text mode cursor style
    procedure MouseSetTextBlock (MType, MScreen, MCursor : Integer);
    -- Return mouse horizontal motion number (positive : right move, negative : left move)

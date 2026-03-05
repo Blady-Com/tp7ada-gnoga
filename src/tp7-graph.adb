@@ -431,9 +431,7 @@ package body TP7.Graph is
       Mouse_Event :        Gnoga.Gui.Base.Mouse_Event_Record) is null;
 
    procedure InitGraph
-     (GraphDriver  : in out Integer;
-      GraphMode    : in out Integer;
-      PathToDriver :        String)
+     (GraphDriver : in out Integer; GraphMode : in out Integer; PathToDriver : String)
    is
       pragma Unreferenced (PathToDriver);
       use type Gnoga.Gui.Element.Canvas.Canvas_Access;
@@ -652,7 +650,7 @@ package body TP7.Graph is
    procedure ClearViewPort is
    begin
       Cr.Clear_Rectangle
-      ((0, 0, IntViewPort.X2 - IntViewPort.X1, IntViewPort.Y2 - IntViewPort.Y1));
+        ((0, 0, IntViewPort.X2 - IntViewPort.X1, IntViewPort.Y2 - IntViewPort.Y1));
       IntGraphResult := grOk;
    end ClearViewPort;
 
@@ -678,14 +676,15 @@ package body TP7.Graph is
       if Pixel <= IntPalette.Size - 1 then
          -- Pixel requires absolute coordinates
          Cr.Pixel
-         (X + IntViewPort.X1, Y + IntViewPort.Y1, To_Pixel (IntColorPalette.Colors (Pixel)));
+           (X + IntViewPort.X1, Y + IntViewPort.Y1, To_Pixel (IntColorPalette.Colors (Pixel)));
       end if;
    end PutPixel;
 
    function GetPixel (X, Y : Integer) return Word is
    begin
       -- Pixel requires absolute coordinates
-      return Word
+      return
+        Word
           (GetIndColor (Gnoga.Types.To_RGBA (Cr.Pixel (X + IntViewPort.X1, Y + IntViewPort.Y1))));
    end GetPixel;
 
@@ -701,7 +700,7 @@ package body TP7.Graph is
 --              Cr.Glogal_Composite_Operation (Gnoga.Gui.Element.Canvas.Context_2D.Xor_Copy);
             IntOperator    := Gnoga.Gui.Element.Canvas.Context_2D.Xor_Copy;
             IntGraphResult := grOk;
-         --  TODO : and, or, not
+            --  TODO : and, or, not
          when others =>
             IntGraphResult := grError;
       end case;
@@ -775,13 +774,14 @@ package body TP7.Graph is
          if (Pattern / 2**15) mod 2 = 0 then
             -- if last bit is 0 we move and add the first value with the last
             if Pattern mod 2 = 0 then
-               return Line (Line'First + 2 .. Line'Last - 1) &
+               return
+                 Line (Line'First + 2 .. Line'Last - 1) &
                  (Line (Line'Last) + Line (Line'First + 1));
-            -- otherwise we move the second value at the end
+               -- otherwise we move the second value at the end
             else
                return Line (Line'First + 2 .. Line'Last) & Line (Line'First + 1);
             end if;
-         -- if there are only ones then set no dashes
+            -- if there are only ones then set no dashes
          elsif Line'Length = 1 then
             return Empty_Dash_List;
          end if;
@@ -925,13 +925,13 @@ package body TP7.Graph is
 
    procedure FloodFill (X, Y : Integer; Border : Word) is
       pragma Unreferenced (Border, Y, X);
-   -- /!\ vérifier que la taille du tas est suffisante ...
-   --        R : aliased Rect;
-   --      PR : RectPtr;
-   --        Words, Height : Integer;
-   --      BM,  Mask   : aliased BitMap;
-   --      DrawPort,  IntPort  : aliased CGrafPtr;
-   --        Pat : aliased Pattern := GetIntPat;
+      -- /!\ vérifier que la taille du tas est suffisante ...
+      --        R : aliased Rect;
+      --      PR : RectPtr;
+      --        Words, Height : Integer;
+      --      BM,  Mask   : aliased BitMap;
+      --      DrawPort,  IntPort  : aliased CGrafPtr;
+      --        Pat : aliased Pattern := GetIntPat;
    begin
       --      DrawPort := GetWindowPort(IntCWind);
       --      HideCursor;
@@ -1054,8 +1054,8 @@ package body TP7.Graph is
 
    procedure GetAspectRatio (XAsp, YAsp : out Word) is
    begin
-      XAsp := 1000;
-      YAsp := 1000;
+      XAsp := 1_000;
+      YAsp := 1_000;
    end GetAspectRatio;
 
    procedure SetAspectRatio (XAsp, YAsp : Word) is
@@ -1173,16 +1173,14 @@ package body TP7.Graph is
    procedure SetPalette (ColorNum : Word; Color : Shortint) is
    --DumRGB : aliased rgbcolor;
    begin
-      if ColorNum <= IntPalette.Size - 1
-        and then Color <= IntPalette.Size - 1
-        and then Color >= 0
+      if ColorNum <= IntPalette.Size - 1 and then Color <= IntPalette.Size - 1 and then Color >= 0
       then
          IntPalette.Colors (ColorNum) := Color;
-      --        DumRGB :=
-      --IntCT4.all.all.CtTable(Standard.Integer(Color)).RGB;
-      --        AnimateEntry(IntCWind, Integer(ColorNum), DumRGB'access);
-      --        ActivatePalette(IntCWind);
-      -- TBF activation
+         --        DumRGB :=
+         --IntCT4.all.all.CtTable(Standard.Integer(Color)).RGB;
+         --        AnimateEntry(IntCWind, Integer(ColorNum), DumRGB'access);
+         --        ActivatePalette(IntCWind);
+         -- TBF activation
       else
          IntGraphResult := grError;
       end if;
@@ -1266,7 +1264,7 @@ package body TP7.Graph is
       end if;
       -- Get_Image_Data requires absolute coordinates
       Cr.Get_Image_Data
-      (BitMap.all, X1 + IntViewPort.X1, Y1 + IntViewPort.Y1, X2 - X1 + 1, Y2 - Y1 + 1);
+        (BitMap.all, X1 + IntViewPort.X1, Y1 + IntViewPort.Y1, X2 - X1 + 1, Y2 - Y1 + 1);
    end GetImage;
 
    procedure PutImage (X, Y : Integer; BitMap : BitMapType; BitBlt : Word) is
@@ -1313,14 +1311,12 @@ package body TP7.Graph is
             case Font.CharCmds (Ch) (Ind).Cmd is
                when FontCHR.Move =>
                   Cr.Move_To
-                  (X +
-                   Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX), Y -
-                   Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY));
+                    (X + Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX),
+                     Y - Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY));
                when FontCHR.Line =>
                   Cr.Line_To
-                  (X +
-                   Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX), Y -
-                   Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY));
+                    (X + Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX),
+                     Y - Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY));
             end case;
          end loop;
       end if;
@@ -1335,14 +1331,12 @@ package body TP7.Graph is
             case Font.CharCmds (Ch) (Ind).Cmd is
                when FontCHR.Move =>
                   Cr.Move_To
-                  (X -
-                   Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY), Y -
-                   Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX));
+                    (X - Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY),
+                     Y - Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX));
                when FontCHR.Line =>
                   Cr.Line_To
-                  (X -
-                   Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY), Y -
-                   Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX));
+                    (X - Integer (Float (Font.CharCmds (Ch) (Ind).Y) * CoeffY),
+                     Y - Integer (Float (Font.CharCmds (Ch) (Ind).X) * CoeffX));
             end case;
          end loop;
       end if;

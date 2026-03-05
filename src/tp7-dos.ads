@@ -286,11 +286,7 @@ package TP7.Dos is
    -- name, and Ext is set to the extension with a preceding dot.
    -- Each of the component strings may possibly be empty, if Path
    -- contains no such component.
-   procedure FSplit
-     (Path : PathStr;
-      Dir  : out DirStr;
-      Name : out NameStr;
-      Ext  : out ExtStr);
+   procedure FSplit (Path : PathStr; Dir : out DirStr; Name : out NameStr; Ext : out ExtStr);
 
    -- EnvCount returns the number of strings contained in the DOS
    -- environment.
@@ -340,10 +336,8 @@ package TP7.Dos is
    function DosExitCode return Word;
 
 private
-   package FileVector is new Ada.Containers.Vectors (
-      Positive,
-      Ada.Strings.Unbounded.Unbounded_String,
-      Ada.Strings.Unbounded."=");
+   package FileVector is new Ada.Containers.Vectors
+     (Positive, Ada.Strings.Unbounded.Unbounded_String, Ada.Strings.Unbounded."=");
    type TFill is new FileVector.Vector with null record;
    --     for TFill'Size use 21*8;
 end TP7.Dos;

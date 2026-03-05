@@ -210,17 +210,9 @@ package TP7.System is
 
    procedure Assign (F : out File; Name : String);
    procedure BlockRead (F : in out File; Buf : Pointer; Quanti : Word);
-   procedure BlockRead
-     (F        : in out File;
-      Buf      : Pointer;
-      Quanti   : Word;
-      Resultat : out Word);
+   procedure BlockRead (F : in out File; Buf : Pointer; Quanti : Word; Resultat : out Word);
    procedure BlockWrite (F : in out File; Buf : Pointer; Quanti : Word);
-   procedure BlockWrite
-     (F        : in out File;
-      Buf      : Pointer;
-      Quanti   : Word;
-      Resultat : out Word);
+   procedure BlockWrite (F : in out File; Buf : Pointer; Quanti : Word; Resultat : out Word);
    procedure Close (F : in out File);
    function Eof (F : File) return Boolean;
    procedure Erase (F : in out File);

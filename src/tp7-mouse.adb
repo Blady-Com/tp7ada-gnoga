@@ -43,40 +43,10 @@ package body TP7.Mouse is
 --     To_Integer : constant array (Gdk.Event.Gdk_Scroll_Direction) of Integer :=
 --       (ScrollUp, ScrollDown, ScrollLeft, ScrollRight, Scroll_Smooth);
    type Cursor_Shapes is
-     (auto,
-      default,
-      none,
-      context_menu,
-      help,
-      pointer,
-      progress,
-      wait,
-      cell,
-      crosshair,
-      text,
-      vertical_text,
-      alias,
-      copy,
-      move,
-      no_drop,
-      not_allowed,
-      e_resize,
-      n_resize,
-      ne_resize,
-      nw_resize,
-      s_resize,
-      se_resize,
-      sw_resize,
-      w_resize,
-      ew_resize,
-      ns_resize,
-      nesw_resize,
-      nwse_resize,
-      col_resize,
-      row_resize,
-      all_scroll,
-      zoom_in,
-      zoom_out);
+     (auto, default, none, context_menu, help, pointer, progress, wait, cell, crosshair, text,
+      vertical_text, alias, copy, move, no_drop, not_allowed, e_resize, n_resize, ne_resize,
+      nw_resize, s_resize, se_resize, sw_resize, w_resize, ew_resize, ns_resize, nesw_resize,
+      nwse_resize, col_resize, row_resize, all_scroll, zoom_in, zoom_out);
    function To_String (Cursor : Cursor_Shapes) return String is
       use Ada.Strings.Maps;
       CM : constant Ada.Strings.Maps.Character_Mapping :=
@@ -164,8 +134,8 @@ package body TP7.Mouse is
    function GetStatus return Integer is
    begin
       delay 0.01;
-      return Boolean'Pos (IntButtons (1).Pressed) +
-        Boolean'Pos (IntButtons (2).Pressed) * 2 +
+      return
+        Boolean'Pos (IntButtons (1).Pressed) + Boolean'Pos (IntButtons (2).Pressed) * 2 +
         Boolean'Pos (IntButtons (3).Pressed) * 4;
    end GetStatus;
 
@@ -318,10 +288,7 @@ package body TP7.Mouse is
    end MouseSetGraphBlock;
 
    procedure MouseSetGraphBlock
-     (Source             : String;
-      Mask               : String;
-      FGColor, BGColor   : Integer;
-      HotSpotX, HotSpotY : Integer)
+     (Source : String; Mask : String; FGColor, BGColor : Integer; HotSpotX, HotSpotY : Integer)
    is
       pragma Unreferenced (Source, Mask, BGColor, FGColor, HotSpotY, HotSpotX);
    begin
@@ -388,8 +355,7 @@ package body TP7.Mouse is
    is
       pragma Unreferenced (Object);
       function Is_Button_Pressed
-        (BN : Integer;
-         ME : Gnoga.Gui.Base.Mouse_Event_Record) return Boolean
+        (BN : Integer; ME : Gnoga.Gui.Base.Mouse_Event_Record) return Boolean
       is
       begin
          case BN is

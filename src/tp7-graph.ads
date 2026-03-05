@@ -262,9 +262,7 @@ package TP7.Graph is
    function GetDriverName return String;
 
    procedure InitGraph
-     (GraphDriver  : in out Integer;
-      GraphMode    : in out Integer;
-      PathToDriver :        String);
+     (GraphDriver : in out Integer; GraphMode : in out Integer; PathToDriver : String);
 
    function RegisterBGIfont (Font : Pointer) return Integer;
    function RegisterBGIdriver (Driver : Pointer) return Integer;

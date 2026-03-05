@@ -320,7 +320,9 @@ package body TP7 is
    begin
 --        Gnoga.Log (Keyboard_Event.Key_Code'Img & ',' & Keyboard_Event.Key_Char'Img);
       -- ASCII char
-      if Ch not in Ada.Characters.Latin_1.NUL | Ada.Characters.Latin_1.CR | Ada.Characters.Latin_1.ESC then
+      if Ch not in Ada.Characters.Latin_1.NUL | Ada.Characters.Latin_1.CR |
+            Ada.Characters.Latin_1.ESC
+      then
          -- Ctrl-C
 --           if Char'Pos (Ch) = Char'Pos ('C') - Char'Pos ('@') then
 --              Gtk.Text_Buffer.Copy_Clipboard
@@ -360,15 +362,15 @@ package body TP7 is
                if Keyboard_Event.Alt then
                   Write_Key
                     (Char'Val (Keyboard_Event.Key_Code - Gnoga.Types.Key_Codes.Key_F1 + 104));
-               -- Control modifier
+                  -- Control modifier
                elsif Keyboard_Event.Control then
                   Write_Key
                     (Char'Val (Keyboard_Event.Key_Code - Gnoga.Types.Key_Codes.Key_F1 + 94));
-               -- Shift modifier
+                  -- Shift modifier
                elsif Keyboard_Event.Shift then
                   Write_Key
                     (Char'Val (Keyboard_Event.Key_Code - Gnoga.Types.Key_Codes.Key_F1 + 84));
-               -- No modifier
+                  -- No modifier
                else
                   Write_Key
                     (Char'Val (Keyboard_Event.Key_Code - Gnoga.Types.Key_Codes.Key_F1 + 59));
@@ -450,7 +452,7 @@ package body TP7 is
    procedure Deactivate_Key_Handler (View : in out Gnoga.Gui.Plugin.Ace_Editor.Ace_Editor_Type) is
    begin
       View.Editor_Execute
-      ("keyBinding.addKeyboardHandler(function() { return { passEvent: true, command: ""null"" }})");
+        ("keyBinding.addKeyboardHandler(function() { return { passEvent: true, command: ""null"" }})");
    end Deactivate_Key_Handler;
 
    procedure Put (S : String; Update_Cursor_Position : Boolean := True) is
@@ -545,8 +547,7 @@ package body TP7 is
                   EndRow          := EndRow - 1;
                   IntCursorColumn := IntCursorColumn - 1;
                   S               :=
-                    S (S'First .. Current - 1) &
-                    S (Current + 1 .. S'Last) &
+                    S (S'First .. Current - 1) & S (Current + 1 .. S'Last) &
                     Ada.Characters.Latin_1.NUL;
                end if;
             when Ada.Characters.Latin_1.ESC => -- Escape
@@ -675,10 +676,10 @@ package body TP7 is
         (ZanyBlue.Text.Locales.Make_Locale_Narrow
            (Gnoga.Gui.Navigator.Language (IntWindow) & ".ISO8859-1"));
       IntGrid.Create
-      (IntWindow,
-       ((Gnoga.Gui.View.Grid.COL, Gnoga.Gui.View.Grid.COL),
-        (Gnoga.Gui.View.Grid.COL, Gnoga.Gui.View.Grid.SPN)), Set_Sizes =>
-         False);
+        (IntWindow,
+         ((Gnoga.Gui.View.Grid.COL, Gnoga.Gui.View.Grid.COL),
+          (Gnoga.Gui.View.Grid.COL, Gnoga.Gui.View.Grid.SPN)),
+         Set_Sizes => False);
 
       IntGrid.Panel (1, 2).Width (640 + 25); -- Graph window width + lift size
       IntGrid.Panel (1, 2).Height (480 + 25); -- Graph window heigth + lift size

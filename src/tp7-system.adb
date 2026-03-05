@@ -302,12 +302,7 @@ package body TP7.System is
    -- BlockRead --
    ---------------
 
-   procedure BlockRead
-     (F        : in out File;
-      Buf      : Pointer;
-      Quanti   : Word;
-      Resultat : out Word)
-   is
+   procedure BlockRead (F : in out File; Buf : Pointer; Quanti : Word; Resultat : out Word) is
    begin
       Resultat := GNAT.OS_Lib.Read (F.File, Buf, Quanti);
    end BlockRead;
@@ -327,12 +322,7 @@ package body TP7.System is
    -- BlockWrite --
    ----------------
 
-   procedure BlockWrite
-     (F        : in out File;
-      Buf      : Pointer;
-      Quanti   : Word;
-      Resultat : out Word)
-   is
+   procedure BlockWrite (F : in out File; Buf : Pointer; Quanti : Word; Resultat : out Word) is
    begin
       Resultat := GNAT.OS_Lib.Write (F.File, Buf, Quanti);
    end BlockWrite;
@@ -524,11 +514,7 @@ package body TP7.System is
             Ada.Long_Long_Float_Text_IO.Put (Output.File, R, MinWidth, DecPlaces, 0);
          when Stdinout =>
             Ada.Long_Long_Float_Text_IO.Put
-              (Ada.Text_IO.Standard_Output,
-               R,
-               MinWidth,
-               DecPlaces,
-               0);
+              (Ada.Text_IO.Standard_Output, R, MinWidth, DecPlaces, 0);
          when Win_CRT =>
             Ada.Long_Long_Float_Text_IO.Put (S, R, DecPlaces, 0);
             TP7.Put (S);
@@ -982,9 +968,7 @@ package body TP7.System is
       if Index = 0 then
          Assign_String (Dest, Ada.Strings.Fixed.Insert (Dest, Pos, Src));
       else
-         Assign_String
-           (Dest,
-            Ada.Strings.Fixed.Insert (Dest, Pos, Src (Src'First .. Index - 1)));
+         Assign_String (Dest, Ada.Strings.Fixed.Insert (Dest, Pos, Src (Src'First .. Index - 1)));
       end if;
    end Insert;
 

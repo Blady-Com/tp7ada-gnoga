@@ -31,7 +31,7 @@ package body TP7.Crt is
       Size   : Byte;
       Colors : IntTabColors;
    end record;
-   IntPalette         : constant IntPaletteType                    :=
+   IntPalette : constant IntPaletteType :=
      (Size   => 16,
       Colors =>
         (Black        => Gnoga.Types.Colors.To_RGBA (Gnoga.Types.Colors.Black),
@@ -51,7 +51,7 @@ package body TP7.Crt is
          Yellow       => Gnoga.Types.Colors.To_RGBA (Gnoga.Types.Colors.Yellow),
          White        => Gnoga.Types.Colors.To_RGBA (Gnoga.Types.Colors.White)));
 --     IntTags            : array (Byte1) of Gtk.Text_Tag.Gtk_Text_Tag := (others => null);
-   IntDefaultTextAttr : constant array (CO80 .. CO80X) of Byte1    :=
+   IntDefaultTextAttr : constant array (CO80 .. CO80X) of Byte1 :=
      (Black * 16 + LightGray, -- DOS screen setting
       White * 16 + Black); -- Color terminal setting
 
@@ -123,12 +123,12 @@ package body TP7.Crt is
 
    procedure Delay1 (MS : Word) is
    begin
-      delay Duration (MS) / 1000.0;
+      delay Duration (MS) / 1_000.0;
    end Delay1;
 
    procedure Sound (Hz : Word) is
       pragma Unreferenced (Hz);
-   --        Level : Integer;
+      --        Level : Integer;
    begin
       --GetSoundVol(Level);
       --Note(Hz, Level * 32, 6);

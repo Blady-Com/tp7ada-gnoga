@@ -90,9 +90,9 @@ package body TP7.Dos is
       IntSec         : constant Natural  := Natural (Seconds_Of_Day);
       FracSec        : constant Real     := Real'Fraction (Real (Seconds_Of_Day));
    begin
-      Hour   := Word (IntSec / 3600);
-      Minute := Word ((IntSec - Hour * 3600) / 60);
-      Second := Word (IntSec - Hour * 3600 - Minute * 60);
+      Hour   := Word (IntSec / 3_600);
+      Minute := Word ((IntSec - Hour * 3_600) / 60);
+      Second := Word (IntSec - Hour * 3_600 - Minute * 60);
       Sec100 := Word (FracSec * 100.0);
    end GetTime;
 
@@ -194,8 +194,7 @@ package body TP7.Dos is
    begin
       if F.Fill.Length > 0 then
          declare
-            Item               : constant String :=
-              Ada.Strings.Unbounded.To_String (F.Fill.Element (1));
+            Item : constant String := Ada.Strings.Unbounded.To_String (F.Fill.Element (1));
             Y, Mo, D, H, Mi, S : Standard.Integer;
          begin
             F.Attr := 0; -- Not set at the moment without openning the file
@@ -230,7 +229,7 @@ package body TP7.Dos is
    end FindNext;
 
    type TimePacked is record
-      Year  : Word range 1980 .. 2107;
+      Year  : Word range 1_980 .. 2_107;
       Month : Word range 1 .. 12;
       Day   : Word range 1 .. 31;
       Hour  : Word range 0 .. 23;
@@ -238,8 +237,8 @@ package body TP7.Dos is
       Sec2  : Word range 0 .. 29; -- double of seconds
    end record;
    for TimePacked use record
-      Sec2  at 0 range 0 .. 4;
-      Min   at 0 range 5 .. 10;
+      Sec2  at 0 range  0 ..  4;
+      Min   at 0 range  5 .. 10;
       Hour  at 0 range 11 .. 15;
       Day   at 0 range 16 .. 20;
       Month at 0 range 21 .. 24;
@@ -253,22 +252,14 @@ package body TP7.Dos is
       Dum : constant TimePacked := To_TimePacked (P);
    begin
       T :=
-        (Sec   => Dum.Sec2 * 2,
-         Min   => Dum.Min,
-         Hour  => Dum.Hour,
-         Day   => Dum.Day,
-         Month => Dum.Month,
-         Year  => Dum.Year);
+        (Sec => Dum.Sec2 * 2, Min => Dum.Min, Hour => Dum.Hour, Day => Dum.Day, Month => Dum.Month,
+         Year => Dum.Year);
    end UnpackTime;
 
    procedure PackTime (T : DateTime; P : out Longint) is
       Dum : constant TimePacked :=
-        (Sec2  => T.Sec / 2,
-         Min   => T.Min,
-         Hour  => T.Hour,
-         Day   => T.Day,
-         Month => T.Month,
-         Year  => T.Year);
+        (Sec2 => T.Sec / 2, Min => T.Min, Hour => T.Hour, Day => T.Day, Month => T.Month,
+         Year => T.Year);
    begin
       P := To_Longint (Dum);
    end PackTime;
@@ -330,8 +321,8 @@ package body TP7.Dos is
          declare
             Name : constant PathStr :=
               To_TPString
-                 (PathStr'Length - 1,
-                  GNAT.OS_Lib.Locate_Regular_File (To_String (Path), To_String (DirList)).all);
+                (PathStr'Length - 1,
+                 GNAT.OS_Lib.Locate_Regular_File (To_String (Path), To_String (DirList)).all);
          begin
             GNAT.OS_Lib.Free (NameAccess);
             return Name;
@@ -346,12 +337,7 @@ package body TP7.Dos is
       return To_TPString (PathStr'Length - 1, GNAT.OS_Lib.Normalize_Pathname (To_String (Path)));
    end FExpand;
 
-   procedure FSplit
-     (Path : PathStr;
-      Dir  : out DirStr;
-      Name : out NameStr;
-      Ext  : out ExtStr)
-   is
+   procedure FSplit (Path : PathStr; Dir : out DirStr; Name : out NameStr; Ext : out ExtStr) is
       Ind1, Ind2 : Integer := TP7.System.Length (Path);
    begin
       while Ind2 > 0 and then Path (Ind2) /= '.' and then Path (Ind2) /= '/' loop
@@ -376,10 +362,8 @@ package body TP7.Dos is
       Assign_String (Dir, Path (1 .. Ind2));
    end FSplit;
 
-   package Environment_Vector is new Ada.Containers.Vectors (
-      Positive,
-      Ada.Strings.Unbounded.Unbounded_String,
-      Ada.Strings.Unbounded."=");
+   package Environment_Vector is new Ada.Containers.Vectors
+     (Positive, Ada.Strings.Unbounded.Unbounded_String, Ada.Strings.Unbounded."=");
 
    Environment_Pairs : Environment_Vector.Vector;
 
