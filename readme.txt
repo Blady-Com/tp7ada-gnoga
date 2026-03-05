@@ -17,8 +17,8 @@ In the package you will find some test examples.
 
 II How to use this package
 
-   GNAT GPL 2017 compiler (with Ada 2005) and Gnoga 1.3a library must be installed before,
-see XNAdaLib-2017 on Blady web site.
+   GNAT compiler (with Ada 2005) and Gnoga 1.6a library must be installed before,
+with ZanyBlue library for the examples, see on Blady web site.
    Your Ada program translated from Turbo Pascal (P2Ada is recommended)
 must be referenced in main.adb source with TP7.Init subprogram.
    Executable is built and run with following instructions for example:
@@ -48,6 +48,5 @@ see Licence_CeCILL_V2-en.txt.
 
 Pascal Pignard,
 December 1998, June 1994, October 2002, September-December 2011, January-November 2012,
-January 2014, June 2014, September 2015, September 2016, January 2018.
-http://blady.pagesperso-orange.fr
-
+January 2014, June 2014, September 2015, September 2016, January 2018, March 2026.
+http://blady.chez.com

@@ -129,10 +129,11 @@ renvoient un message d'avertissement si Debug est activé.
 
      III Mise en oeuvre des unités TP7Ada :
 
-     Au préalable, le compilateur GNAT GNAT GPL 2017 (avec Ada 2005) et la bibliothèque Gnoga 1.3a
-doivent être installés, voir XNAdaLib-2017 par ailleurs sur Blady.
+     Au préalable, le compilateur GNAT (avec Ada 2005) et la bibliothèque Gnoga 1.6a
+doivent être installés, avec en plus la bibliothèque ZanyBlue pour les exemples,
+voir par ailleurs sur Blady.
 
-	Les sources (UTF-8) de la bibliothèque version 10.2a sont :
+	Les sources (UTF-8) de la bibliothèque version 11.0a sont :
 	read-me.txt
 	lisez-moi.txt
 	makefile
@@ -164,8 +165,8 @@ Répertoire src :
 	tp7-system.ads		2.3a
 	tp7-test.adb		10.0a
 	tp7-test.ads		1.0a
-	tp7.adb				10.2a
-	tp7.ads				10.2a
+	tp7.adb				11.0a
+	tp7.ads				11.0a
 	tp7.gpr
 
      Tout d'abord créer un projet main avec le constructeur de Gnoga :
@@ -225,6 +226,9 @@ programmes graphiques sur Macintosh, Unix ou Windows.
 
      VII Historique :
 
+- 11.0a : Suppression de la dépendance à ZanyBlue. Report de la dépendance à ZanyBlue dans les exemples.
+          Corrections de compilation et d'exécution.
+          Déplace l'environnement d'exécution de Gnoga dans le dossier examples.
 - 10.2a : Adaptation à Gnoga 1.2a:
 		- tp7-graph.adb et tp7-crt.adb: ajout de Elaborate_All (Gnoga.Types.Colors),
 		- tp7.ads et adb : ajout de Main_Loop, réorganisation des panneaux et détermination de la langue
@@ -288,6 +292,5 @@ programmes graphiques sur Macintosh, Unix ou Windows.
 
 Pascal Pignard,
 décembre 1988, juin 1994, octobre 2002, septembre-décembre 2011, janvier-novembre 2012,
-janvier 2014, juin 2014, septembre 2015, septembre 2016, janvier 2018.
-http://blady.pagesperso-orange.fr
-
+janvier 2014, juin 2014, septembre 2015, septembre 2016, janvier 2018, mars 2026.
+http://blady.chez.com
