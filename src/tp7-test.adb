@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- NOM DU CSU (corps)               : tp7-test.adb
 -- AUTEUR DU CSU                    : Pascal Pignard
--- VERSION DU CSU                   : 10.0a
--- DATE DE LA DERNIERE MISE A JOUR  : 22 février 2015
+-- VERSION DU CSU                   : 11.0b
+-- DATE DE LA DERNIERE MISE A JOUR  : 05 mars 2026
 -- ROLE DU CSU                      : Unité de test.
 --
 --
@@ -11,9 +11,9 @@
 -- FONCTIONS LOCALES DU CSU         :
 --
 --
--- NOTES                            : Ada 2005, GNOGA 1.1a
+-- NOTES                            : Ada 2005, GNOGA 1.6a
 --
--- COPYRIGHT                        : (c) Pascal Pignard 2011-2015
+-- COPYRIGHT                        : (c) Pascal Pignard 2011-2026
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
 -- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ package body TP7.Test is
       TestCheckBox.Create (Form => TestForm, Name => TestName);
       Dummy_TestLabel.Create (TestForm, TestCheckBox.all, TestName);
       TestForm.New_Line;
-      TestProcs.Append ((TestProc, TestCheckBox));
+      TestProcs.Append (TestProcRec'(TestProc, TestCheckBox));
    end Add;
 
    ---------------

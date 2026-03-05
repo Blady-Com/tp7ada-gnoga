@@ -1,7 +1,7 @@
-		TURBO PASCAL UNITS IN ADA
+# TURBO PASCAL UNITS IN ADA
 
 
-I Introduction
+## Introduction
 
    Gnoga framework facilitate graphic programming in Ada.
 And also ease translation of Pascal applications into Ada
@@ -15,14 +15,15 @@ from Turbo Pascal, I provide some bindings of Turbo Pascal 7.0 units.
 In the package you will find some test examples.
 
 
-II How to use this package
+## How to use this package
 
-   GNAT compiler (with Ada 2005) and Gnoga 1.6a library must be installed before,
+   GNAT compiler (with Ada 2005) and Gnoga library must be installed before,
 with ZanyBlue library for the examples, see on Blady web site.
    Your Ada program translated from Turbo Pascal (P2Ada is recommended)
 must be referenced in main.adb source with TP7.Init subprogram.
    Executable is built and run with following instructions for example:
 
+```
 $ gnoga_make new main hello_world
 $ cd main
 $ cd js
@@ -32,13 +33,24 @@ $ cd ..
 # Add 'with "TP7";' to src/main.gpr
 $ make
 $ ./bin/main
+```
 
   The program is composed of a control view : start and stop execution
 of your program with a Debug option, a text view if TP7.CRT is used,
 a graphic view if TP7.Graph is used.
 
 
-III Use and licence
+## Using Alire
+
+In your own [Alire](https://alire.ada.dev) project, add TP7_Gnoga dependency:
+
+`% alr with tp7_gnoga`
+
+Then you can import the Ada TP7 packages in your programs.
+
+Note: Alire will take care of dependencies.
+
+## Use and licence
 
    This library is provide only for test, as it is.
 It is not aimed to build any software other than for test.
@@ -47,6 +59,9 @@ All parts indicated belong to their copyright holder.
 see Licence_CeCILL_V2-en.txt.
 
 Pascal Pignard,
+
 December 1998, June 1994, October 2002, September-December 2011, January-November 2012,
 January 2014, June 2014, September 2015, September 2016, January 2018, March 2026.
+
 http://blady.chez.com
+

@@ -133,7 +133,7 @@ renvoient un message d'avertissement si Debug est activé.
 doivent être installés, avec en plus la bibliothèque ZanyBlue pour les exemples,
 voir par ailleurs sur Blady.
 
-	Les sources (UTF-8) de la bibliothèque version 11.0a sont :
+	Les sources (UTF-8) de la bibliothèque version 11.0b sont :
 	read-me.txt
 	lisez-moi.txt
 	makefile
@@ -155,7 +155,7 @@ Répertoire src :
 	tp7-dos.adb			2.2a
 	tp7-dos.ads			2.2a
 	tp7-graph-fontchr.adb	1.0a
-	tp7-graph.adb		10.2a
+	tp7-graph.adb		11.0b
 	tp7-graph.ads		10.0a
 	tp7-mouse.adb		10.0a
 	tp7-mouse.ads		10.1a
@@ -163,7 +163,7 @@ Répertoire src :
 	tp7-printer.ads		2.1a
 	tp7-system.adb		2.3c
 	tp7-system.ads		2.3a
-	tp7-test.adb		10.0a
+	tp7-test.adb		11.0b
 	tp7-test.ads		1.0a
 	tp7.adb				11.0a
 	tp7.ads				11.0a

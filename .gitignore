@@ -7,3 +7,5 @@ bin/
 *.npp
 LPT1.txt
 examples/*_mesg*.ad?
+alire/
+config/

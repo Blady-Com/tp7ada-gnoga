@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- NOM DU CSU (corps)               : tp7-graph.adb
 -- AUTEUR DU CSU                    : Pascal Pignard
--- VERSION DU CSU                   : 10.2a
--- DATE DE LA DERNIERE MISE A JOUR  : 15 septembre 2016
+-- VERSION DU CSU                   : 11.0b
+-- DATE DE LA DERNIERE MISE A JOUR  : 05 mars 2026
 -- ROLE DU CSU                      : Unité d'émulation Turbo Pascal 7.0.
 --
 --
@@ -11,9 +11,9 @@
 -- FONCTIONS LOCALES DU CSU         :
 --
 --
--- NOTES                            : Ada 2005, GNOGA 1.2a
+-- NOTES                            : Ada 2005, GNOGA 1.6a
 --
--- COPYRIGHT                        : (c) Pascal Pignard 2002-2016
+-- COPYRIGHT                        : (c) Pascal Pignard 2002-2026
 -- LICENCE                          : CeCILL V2 (http://www.cecill.info)
 -- CONTACT                          : http://blady.chez.com
 -------------------------------------------------------------------------------
@@ -560,12 +560,12 @@ package body TP7.Graph is
       IntX := 0;
       IntY := 0;
       SetRect (IntMaxRect, 0, 0, 639, 479);
-      SetViewPort (0, 0, GetMaxX, GetMaxY, ClipOn);
       GetDefaultPalette (IntPalette);
       SetColor (White);
       SetBkColor (Black);
       SetLineStyle (SolidLn, 0, NormWidth);
       SetFillStyle (SolidFill, GetMaxColor);
+      SetViewPort (0, 0, GetMaxX, GetMaxY, ClipOn);
       for Ind in 1 .. 8 loop
          IntFillPat (Ind) := 16#FF#;
       end loop;

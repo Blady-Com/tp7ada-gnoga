@@ -1,0 +1,16 @@
+name = "tp7_gnoga"
+description = "Turbo Pascal 7 units in Ada"
+version = "11.0.0"
+tags = ["tp7", "gnoga", "p2ada"]
+
+authors = ["Pascal Pignard"]
+maintainers = ["Pascal Pignard <blady.net@orange.fr>"]
+maintainers-logins = ["Blady-Com"]
+website = "https://github.com/Blady-Com/tp7ada-gnoga"
+
+licenses = "CECILL-C"
+
+project-files = ["lib_tp7ada_gnoga.gpr"]
+
+[[depends-on]]
+gnoga = "^1.6"

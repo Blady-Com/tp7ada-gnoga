@@ -1,0 +1,35 @@
+with "lib_gnoga";
+
+library project Lib_TP7Ada_Gnoga is
+
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+
+   for Languages use ("Ada");
+   for Library_Kind use "static";
+   for Library_Name use "lib_tp7ada_gnoga";
+   for Library_Dir use "lib";
+   for Library_Kind use "static";
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-gnatU", "-gnatf", "-gnatVaep", "-gnatw.eDH.Y.N",
+                                        "-fstack-check", "-g", "-gnato", "-gnata",
+                                        "-gnateE", "-gnateF", "-gnat2022", "-Wall");
+      for Local_Configuration_Pragmas use "pragma_debug.adc";
+   end Compiler;
+
+   package Binder is
+      for Default_Switches ("ada") use ("-Es");
+   end Binder;
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-M120", "-W8", "--comments-unchanged");
+   end Pretty_Printer;
+
+   package Install is
+      for Install_Name use "tp7ada_gnoga";
+      for Artifacts ("share/tp7ada-gnoga/tp7ada_rm") use (Project'Object_Dir & "/gnatdoc/*");
+      for Artifacts ("share/tp7ada-gnoga/examples") use ("examples/*.adb");
+   end Install;
+
+end Lib_TP7Ada_Gnoga;

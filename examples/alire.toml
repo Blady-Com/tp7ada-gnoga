@@ -1,0 +1,22 @@
+name = "tp7_gnoga_examples"
+description = "Examples for Turbo Pascal 7 units in Ada"
+version = "11.0.0"
+tags = ["tp7", "gnoga", "p2ada"]
+
+authors = ["Pascal Pignard"]
+maintainers = ["Pascal Pignard <blady.net@orange.fr>"]
+maintainers-logins = ["Blady-Com"]
+website = "https://github.com/Blady-Com/tp7ada-gnoga"
+
+licenses = "CECILL-C"
+
+project-files = ["tp7_gnoga_examples.gpr"]
+
+executables = ["main"]
+
+[[depends-on]]
+tp7_gnoga = "^11"
+zblib = "1.4.0"
+
+[[pins]]
+tp7_gnoga = { path = '..' }
