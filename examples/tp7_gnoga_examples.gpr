@@ -1,7 +1,7 @@
 with "lib_tp7ada_gnoga.gpr";
 with "zanyblue.gpr";
 
-project Examples is
+project TP7_Gnoga_Examples is
 
    for Source_Dirs use (".");
    for Object_Dir use "obj";
@@ -28,4 +28,4 @@ project Examples is
        for Default_Switches ("ada") use ("-g", "-Wl,-no_pie");
    end Linker;
 
-end Examples;
+end TP7_Gnoga_Examples;
