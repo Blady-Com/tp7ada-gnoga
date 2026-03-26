@@ -12,5 +12,9 @@ licenses = "CECILL-C"
 
 project-files = ["lib_tp7ada_gnoga.gpr"]
 
+# Avoid error: value not in range of type "Standard.Long_Long_Float" for AARCH64
+available."case(os)".MacOS."case(host-arch)".AARCH64 = false
+available."case(distribution)".ubuntu."case(host-arch)".AARCH64 = false
+
 [[depends-on]]
 gnoga = "^1.6"
