@@ -25,7 +25,7 @@ project TP7_Gnoga_Examples is
    end Pretty_Printer;
 
    package Linker is
-       for Default_Switches ("ada") use ("-g", "-Wl,-no_pie");
+       for Default_Switches ("ada") use ("-g");
    end Linker;
 
 end TP7_Gnoga_Examples;
