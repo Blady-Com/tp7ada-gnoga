@@ -18,5 +18,20 @@ executables = ["main"]
 tp7_gnoga = "^11"
 zblib = "1.4.0"
 
+[[actions]]
+type = "post-fetch"
+command = ["alr" , "install" , "zbmcompile=1.4.1"]
+
+[[actions]]
+type = "pre-build"
+command = ["sh" , "-c", "$HOME/.alire/bin/zbmcompile -i -v Courbes_Mesg -G strings -X ignore courbes"]
+[[actions]]
+type = "pre-build"
+command = ["sh" , "-c", "$HOME/.alire/bin/zbmcompile -i -v Surfaces_Mesg -G strings -X ignore surfaces"]
+
+[[actions]]
+type = "pre-build"
+command = ["sh" , "-c", "$HOME/.alire/bin/zbmcompile -i -v Sudoku_Mesg -G strings -X ignore sudoku"]
+
 [[pins]]
 tp7_gnoga = { path = '..' }
